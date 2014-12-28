@@ -76,7 +76,7 @@ pre($xml);
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
 
-**Sample: A REST API Page**
+**Sample: REST API Page**
 
 ```php
 // Get user messages
@@ -84,21 +84,21 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
         // Built DOM Tree
         $dom = new Dom\Dom();
         $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
-        
+
         // Create root node and append it into Document
-        $nodeMessages = $doc->createElement('messages');
-        $nodeMessages->appendTo($doc);
-        
+        $messagesNode = $doc->createElement('messages');
+        $messagesNode->appendTo($doc);
+
         foreach ($app->getUserMessages($request->id) as $message) {
             // Create and append child nodes into root node
-            $nodeMessage = $doc->createElement('message', [
+            $messageNode = $doc->createElement('message', [
                 'date' => $message->date,
                 'read' => $message->read
             ]);
-            $nodeMessage->appendText($message->text); // Or appendCData if needed
-            $nodeMessage->appendTo($nodeMessages);
+            $messageNode->appendText($message->text); // Or appendCData if needed
+            $messageNode->appendTo($messagesNode);
         }
-        
+
         // Get output
         $xml = $doc->toString();
         // Send response as XML
