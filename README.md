@@ -109,7 +109,9 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
 });
 ```
 
-**Method Map of `Dom\Node\Node`**
+**Method Maps**
+
+** `Dom\Node\Node`
 
 ```php
 // Modifier methods
