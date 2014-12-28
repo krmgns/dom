@@ -12,10 +12,11 @@ Now, let's see what we can do it that sweet thing... :)
 - It does not use [PHP DOM](//php.net/book.dom)
 - "For now", it designed for only create and modify HTML/XML documents
 - Set your autoloder first to get it work well
+- See all method maps of objects after examples
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 
 
-**HTML Documents**
+**Example: HTML Documents**
 
 ```php
 // Create first Document node (default #document)
@@ -46,7 +47,7 @@ pre($html);
 <body><div class="cls1 cls2" style="color:#ff0;" id="theDiv">The DIV text...</div></body>
 ```
 
-**XML Documents**
+**Example: XML Documents**
 
 ```php
 // Create first Document node (set as xml)
