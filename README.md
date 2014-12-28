@@ -2,15 +2,15 @@
 
 As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple and easy to work with it.
 
-So, DOM object creates HTML and XML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g REST endpoints or AJAX pages that returns contents in HTML or XML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
+So, DOM object creates XML/HTML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g. REST endpoints or AJAX pages that returns contents in XML/HTML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
 
-Now, let's see what we can do it that sweet thing... :)
+Now, let's see what we can do with that sweet thing... :)
 
 **Notices**
 
 - It is not 100% implementation of [WC3 DOM specs](//www.w3.org/DOM) (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
-- It does not use [PHP DOM](//php.net/book.dom)
-- "For now", it designed for only create and modify HTML/XML documents
+- It does not use [PHP DOM](//php.net/book.dom) Library
+- "JUST FOR NOW", it designed for only create and modify XML/HTML documents (will be extended for Parse/Query supports)
 - Set your autoloder first to get it work well
 - See all method maps of objects after samples
 - See `pre()` and `prd()` functions in `test.php`
@@ -38,7 +38,7 @@ $div = $doc->createElement('div', [
 $div->appendTo($body);
 // Or $body->append($div);
 
-// And get Document contents as HTML output
+// Finally get Document contents as HTML output
 $html = $doc->toString();
 pre($html);
 
@@ -67,7 +67,7 @@ $apples = $doc->createElement('apples')
     ->append($doc->createElement('apple', ['color' => 'green'],  null, true))
     ->appendTo($fruits);
 
-// And get Document contents as XML output
+// Finally get Document contents as XML output
 $xml = $doc->toString();
 pre($xml);
 
@@ -81,31 +81,31 @@ pre($xml);
 ```php
 // Get user messages
 $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use($app) {
-        // Built DOM Tree
-        $dom = new \Dom\Dom();
-        $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
+    // Built DOM Tree
+    $dom = new \Dom\Dom();
+    $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
 
-        // Create root node and append it into Document
-        $messagesNode = $doc->createElement('messages');
-        $messagesNode->appendTo($doc);
+    // Create root node and append it into Document
+    $messagesNode = $doc->createElement('messages');
+    $messagesNode->appendTo($doc);
 
-        foreach ($app->getUserMessages($request->id) as $message) {
-            // Create child node
-            $messageNode = $doc->createElement('message', [
-                // Add attributes
-                'date' => $message->date,
-                'read' => $message->read
-            ]);
-            // Set inner text (or appendCData if needed)
-            $messageNode->appendText($message->text);
-            // Append child node into root node
-            $messageNode->appendTo($messagesNode);
-        }
+    foreach ($app->getUserMessages($request->id) as $message) {
+        // Create child node
+        $messageNode = $doc->createElement('message', [
+            // Add attributes
+            'date' => $message->date,
+            'read' => $message->read
+        ]);
+        // Set inner text (or appendCData if needed)
+        $messageNode->appendText($message->text);
+        // Append child node into root node
+        $messageNode->appendTo($messagesNode);
+    }
 
-        // Get output
-        $xml = $doc->toString();
-        // Send response as XML
-        $response->send($xml);
+    // Get output
+    $xml = $doc->toString();
+    // Send response as XML
+    $response->send($xml);
 });
 ```
 
