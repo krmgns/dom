@@ -111,6 +111,13 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
 
 **Method Maps**
 
+** `\Dom\Dom`
+
+```php
+Document $document $dom.document(
+    $doctype=Document.DOCTYPE_HTML, $encoding=Document.DEFAULT_ENCODING, $version=null)
+```
+
 ** `\Dom\Node\Node`
 
 ```php
@@ -141,7 +148,7 @@ bool                             $node.hasAttributes(void)
 // Attribute methods
 Node $node                       $node.setAttributeObject(Attribute $attribute)
 Attribute $attribute             $node.getAttributeObject(string name)
-Node $node                       $node.setAttribute(string|array $name, mixed $value = null)
+Node $node                       $node.setAttribute(string|array $name, mixed $value=null)
 bool                             $node.hasAttribute(string $name)
 string                           $node.getAttribute(string $name)
 Node $node                       $node.removeAttribute(string $name)
@@ -164,8 +171,8 @@ string                           $node.getInnerText(void)
 // Misc. methods
 string                           $node.getPath(void)
 string                           $node.toString(void)
-void                             $node.setParent(Node $parent = null)
-void                             $node.setOwnerDocument(Document $ownerDocument = null)
+void                             $node.setParent(Node $parent=null)
+void                             $node.setOwnerDocument(Document $ownerDocument=null)
 bool                             $node.isChildOf(Node $target)
 bool                             $node.isParentOf(Node $target)
 bool                             $node.isSameNode(Node $target)
@@ -181,6 +188,103 @@ void                             $doctype.addDoctypeString(bool)
 ** `\Dom\Node\Document` extends `\Dom\Node\Node`
 
 ```php
-// proxy for $document.doctype.addDoctypeString()
-void                             $document.addDoctypeString(bool)
+void                             $document.addDoctypeString(bool) // proxy: $document.doctype.addDoctypeString()
+Element $element                 $document.createElement(string $tag, array $attributes=null, $text='', $selfClosing=null) {
+Node $node                       $document.create(\Dom\Node\Node.TYPE_(ELEMENT|TEXT|CDATA|COMMENT) $type, string $contents)
+Node $text                       $document.createText(string $contents)
+Node $cData                      $document.createCData(string $contents)
+Node $comment                    $document.createComment(string $contents)
+// @notimplemented
+void                             $document.getElementById(string $id)
+void                             $document.getElementsByTagName(string $tagName)
+void                             $document.getElementsByClassName(string $className)
+// @notimplemented
+void                             load(string $html)
+void                             save()
+```
+
+** `\Dom\Node\Element` extends `\Dom\Node\Node`
+
+```php
+// Class methods
+bool                             $element.hasClass(string $name)
+Element $element                 $element.addClass(string|array $value)
+Element $element                 $element.removeClass(string $name)
+string                           $element.getClassText(void)
+ClassCollection $classCollection $element.getClassCollection(void)
+
+// Style methods
+Element $element                 $element.setStyle(string|array $name, $value = null)
+string                           $element.getStyle($name)
+Element $element                 $element.removeStyle(string $name)
+string                           $element.getStyleText(void)
+StyleCollection $styleCollection $element.getStyleCollection(void)
+```
+
+** `\Dom\Patterns\InterfaceTrivialNode`
+
+```php
+void                             $sub.setContent(string $content)
+string                           $sub.getContent()
+```
+
+** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
+** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
+** `\Dom\Node\Comment` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
+
+** `\Dom\Patterns\AbstractElementProperty`
+
+```php
+throw                            __set(string $name, string $value)
+string $name|$value|throw        __get(string $name)
+void                             $sub.setOwnerElement(Element $ownerElement=null)
+Element $this.ownerElement       $sub.getOwnerElement(Element $ownerElement=null)
+string                           $sub.getName(void)
+string                           $sub.getValue(void)
+abstract                         toString(void)
+```
+
+** `\Dom\Node\Style` extends `\Dom\Patterns\AbstractElementProperty`
+
+** `\Dom\Node\Attribute` extends `\Dom\Patterns\AbstractElementProperty`
+
+```php
+bool                             $sub.isId()
+
+** `\Dom\Node\NodeCollection` extends `\Dom\Collection`
+** `\Dom\Node\StyleCollection` extends `\Dom\Collection`
+** `\Dom\Node\ClassCollection` extends `\Dom\Collection`
+** `\Dom\Node\AttributeCollection` extends `\Dom\Collection`
+```
+
+** `\Dom\Collection` implements `\Countable, \IteratorAggregate, \ArrayAccess`
+
+```php
+Collection $collection           __construct(array $items=null)
+throw                            __set(string $name, mixed $value)
+mixed $value|throw               __get(string $name)
+Collection $collection           $sub.add(mixed $item)
+Collection $collection           $sub.del(int $i)
+Collection $collection           $sub.delAll(void)
+mixed                            $sub.pop()
+mixed                            $sub.shift()
+Collection $collection           $sub.put(int $i, mixed $item)
+Collection $collection           $sub.append(mixed $item)
+Collection $collection           $sub.prepend(mixed $item)
+Collection $collection           $sub.unique(void)
+Collection $collection           $sub.filter(\Closure $callback)
+Collection $collection|throw     $sub.replace(int $i, mixed $item)
+int|null                         $sub.index(mixed $item)
+bool                             $sub.has(int $i)
+mixed $item|throw                $sub.item(int $i)
+array                            $sub.toArray(void)
+// \Countable
+int                              $sub.count(void)
+// \IteratorAggregate
+\ArrayIterator $arrayIterator    $sub.getIterator(void)
+// \ArrayAccess
+Collection $collection|throw     $sub.offsetSet(int $i, mixed $value)
+mixed|throw                      $sub.offsetGet(int $i)
+Collection $collection           $sub.offsetUnset(int $i)
+bool                             $sub.offsetExists($i)
 ```
