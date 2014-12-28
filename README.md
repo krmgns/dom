@@ -14,7 +14,7 @@ Now, let's see what we can do with that sweet thing... :)
 - Set your autoloder first to get it work well
 - See all method maps of objects after samples
 - See `pre()` and `prd()` functions in `test.php`
-- Requires PHP >= 5.3 (only samples contain 5.4 features like `[]` array)
+- Requires PHP >= 5.3 (only samples contain 5.4 features, e.g `[]` arrays)
 
 **Sample: HTML Documents**
 
