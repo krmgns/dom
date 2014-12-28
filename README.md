@@ -26,7 +26,7 @@ $doc = $dom->document();
 $body = $doc->createElement('body');
 $body->appendTo($doc);
 
-// Create <div> node
+// Create <div> node with "attributes" and "textContent"
 $div = $doc->createElement('div', [
     'id' => 'theDiv',
     'class' => 'cls1 cls2',
@@ -34,8 +34,8 @@ $div = $doc->createElement('div', [
 ], 'The DIV text...');
 
 // Append <div> into <body>
-$body->append($div);
-// Or $div->appendTo($body);
+$div->appendTo($body);
+// Or $body->append($div);
 
 // And get Document contents as HTML output
 $html = $doc->toString();
