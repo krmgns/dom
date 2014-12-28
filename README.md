@@ -84,20 +84,24 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
         // Built DOM Tree
         $dom = new Dom\Dom();
         $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
-        // Create root node
-        $nodeMessages = $doc->createElement('messages');    
+        
+        // Create root node and append it into Document
+        $nodeMessages = $doc->createElement('messages');
+        $nodeMessages->appendTo($doc);
+        
         foreach ($app->getUserMessages($request->id) as $message) {
-            // Append child nodes
+            // Create and append child nodes into root node
             $nodeMessage = $doc->createElement('message', [
                 'date' => $message->date,
                 'read' => $message->read
             ]);
-            // Or appendCData if needed
-            $nodeMessage->appendText($message->text);
+            $nodeMessage->appendText($message->text); // Or appendCData if needed
             $nodeMessage->appendTo($nodeMessages);
         }
+        
         // Get output
         $xml = $doc->toString();
+        // Send response as XML
         $response->send($xml);
 });
 ```
