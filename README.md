@@ -61,25 +61,25 @@ pre($xml);
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
 
-** Insert Methods
+** `Dom\Node\Node` method map
 
 ```php
-node.append(Node $child)
-node.prepend(Node $child)
-node.replace(Node $newChild)
-node.replaceChild(Node $oldChild, Node $newChild)
-node.before(Node $refSibling)
-node.after(Node $refSibling)
-node.appendTo(Node $parentNode)
-node.prependTo(Node $parentNode)
-node.appendAfter(Node $target)
-node.appendBefore(Node $target)
-node.remove(Node $node)
-node.doClone(bool $deep = false)
-node.doEmpty(void)
-node.appendText(string $contents)
-node.appendComment(string $contents)
-node.appendCData(string $contents)
-node.hasChildren(void)
-node.hasAttributes(void)
+// Modifier methods
+Node $parent    $parent.append(Node $child)
+Node $parent    $parent.prepend(Node $child)
+Node $new       $old.replace(Node $new)
+Node $parent    $parent.replaceChild(Node $new, Node $new)
+Node $target    $target.before(Node $sibling)
+Node $target    $target.after(Node $sibling)
+Node $child     $child.appendTo(Node $parent)
+Node $child     $child.prependTo(Node $parent)
+Node $new       $new.appendAfter(Node $target)
+Node $new       $new.appendBefore(Node $target)
+Node $parent    $parent.remove(Node $child)
+Node $node      $node.doEmpty(void)
+Node $node      $node.appendText(string $contents)
+Node $node      $node.appendComment(string $contents)
+Node $node      $node.appendCData(string $contents)
 ```
+
+
