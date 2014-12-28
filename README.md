@@ -1,15 +1,21 @@
 **NOT COMPLETED!**
 
-**First**
+As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple to work with it.
 
-- It is not an exact implementation of WC3 DOM specs, but similar to mii.js (see: /qeremy/mii)
+So, DOM object creates HTML and XML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g AJAX files that returns contents in HTML or XML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
+
+Now, let's see what we can do it that sweet thing... :)
+
+**Notices**
+
+- It is not 100% implementation of WC3 DOM specs (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
 - It does not use PHP DOM (php.net/book.dom)
 - "For now", it designed for only create and modify HTML/XML documents
 - Set your autoloder first to get it work well
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 
 
-** HTML Documents
+**HTML Documents**
 
 ```php
 // Create first Document node (default #document)
@@ -40,7 +46,7 @@ pre($html);
 <body><div class="cls1 cls2" style="color:#ff0;" id="theDiv">The DIV text...</div></body>
 ```
 
-** XML Documents
+**XML Documents**
 
 ```php
 // Create first Document node (set as xml)
@@ -69,7 +75,7 @@ pre($xml);
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
 
-** `Dom\Node\Node` method map
+**Method Map of `Dom\Node\Node`**
 
 ```php
 // Modifier methods
