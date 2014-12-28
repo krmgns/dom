@@ -90,12 +90,15 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
         $messagesNode->appendTo($doc);
 
         foreach ($app->getUserMessages($request->id) as $message) {
-            // Create and append child nodes into root node
+            // Create child node
             $messageNode = $doc->createElement('message', [
+                // Add attributes
                 'date' => $message->date,
                 'read' => $message->read
             ]);
+            // Set inner text
             $messageNode->appendText($message->text); // Or appendCData if needed
+            // Append into root node
             $messageNode->appendTo($messagesNode);
         }
 
