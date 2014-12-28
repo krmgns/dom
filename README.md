@@ -8,8 +8,8 @@ Now, let's see what we can do it that sweet thing... :)
 
 **Notices**
 
-- It is not 100% implementation of WC3 DOM specs (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
-- It does not use PHP DOM (php.net/book.dom)
+- It is not 100% implementation of [WC3 DOM specs](//www.w3.org/DOM) (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
+- It does not use [PHP DOM](//php.net/book.dom)
 - "For now", it designed for only create and modify HTML/XML documents
 - Set your autoloder first to get it work well
 - See `pre()` and `prd()` functions in `test.php`
