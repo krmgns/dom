@@ -14,7 +14,7 @@ Now, let's see what we can do with that sweet thing... :)
 - Set your autoloder first to get it work well
 - See all method maps of objects after samples
 - See `pre()` and `prd()` functions in `test.php`
-- Requires PHP >= 5.3 
+- Requires PHP >= 5.3 (only samples contain 5.4 features like `[]` array)
 
 **Sample: HTML Documents**
 
@@ -29,7 +29,7 @@ $body->appendTo($doc);
 
 // Create <div> node with "attributes" and "textContent"
 $div = $doc->createElement('div', [
-    'id' => 'theDiv',
+    'id'    => 'foo',
     'class' => 'cls1 cls2',
     'style' => ['color' => '#ff0']
 ], 'The DIV text...');
