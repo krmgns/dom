@@ -82,8 +82,8 @@ pre($xml);
 // Get user messages
 $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use($app) {
         // Built DOM Tree
-        $dom = new Dom\Dom();
-        $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
+        $dom = new \Dom\Dom();
+        $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
 
         // Create root node and append it into Document
         $messagesNode = $doc->createElement('messages');
@@ -98,7 +98,7 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
             ]);
             // Set inner text
             $messageNode->appendText($message->text); // Or appendCData if needed
-            // Append into root node
+            // Append child node into root node
             $messageNode->appendTo($messagesNode);
         }
 
