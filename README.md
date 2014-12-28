@@ -114,18 +114,21 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
 ```php
 // simple
 $div->setAttribute('data-foo', 'The Foo!');
-prd($div->hasAttribute('data-foo'));
-prd($div->getAttribute('data-foo'));
+prd($div->hasAttribute('data-foo'));   // bool(true)
+prd($div->getAttribute('data-foo'));   // string(8) "The Foo!"
 $div->removeAttribute('data-foo');
-prd($div->hasAttribute('data-foo'));
-prd($div->getAttribute('data-foo'));
+prd($div->hasAttribute('data-foo'));   // bool(false)
+prd($div->getAttribute('data-foo'));   // NULL
+
 // set object
 $div->setAttributeObject(new \Dom\Node\Attribute('data-foo', 'The Foo!', $div));
+
 // or 
 $atr = new \Dom\Node\Attribute('data-foo', 'The Foo!');
 $atr->setOwnerElement($div);
 $div->setAttributeObject($atr);
-prd($div->getAttribute('data-foo'));
+
+prd($div->getAttribute('data-foo'));   // string(8) "The Foo!"
 ```
 
 **Element style/class**
@@ -134,15 +137,43 @@ prd($div->getAttribute('data-foo'));
 // Add, remove and get style text
 $div->setStyle('width', '330px');
 $div->removeStyle('color');
-prd($div->getStyle('color'));
-prd($div->getStyle('width'));
+prd($div->getStyle('color'));  // NULL
+prd($div->getStyle('width'));  // string(5) "330px"
 
 // Add, remove, check and get class text
 $div->addClass('cls3');
 $div->removeClass('cls1');
-prd($div->hasClass('cls1'));
-prd($div->hasClass('cls2'));
-prd($div->getClassText());
+prd($div->hasClass('cls1'));   // bool(false)
+prd($div->hasClass('cls2'));   // bool(true)
+prd($div->getClassText());     // string(9) "cls2 cls3"
+```
+
+**Walker Methods**
+
+```php
+// Append more child into <div>
+$pre = $doc->createElement('pre', ['class' => 'pre-class'])
+   ->append($doc->createElement('br'))
+   ->append($doc->createElement('i', null, 'i0'))
+   ->append($doc->createElement('i', null, 'i1'));
+$pre->appendTo($div);
+
+// Get path
+pre($pre->getPath());                     // #document/body/div/pre
+pre($pre->item(0)->getPath());            // #document/body/div/pre/i[0]
+pre($pre->item(1)->getPath());            // #document/body/div/pre/i[1]
+
+// Get first/last child and prev/next sibling(s)
+pre($div->first()->name);                 // #text
+pre($div->last()->name);                  // pre
+pre($pre->first()->name);                 // br
+pre($pre->last()->name);                  // i
+pre($pre->item(1)->prev()->name);         // br
+pre($pre->last()->prev()->name);          // i
+pre($pre->first()->next()->name);         // i
+pre($pre->first()->nextAll()->length);    // 2
+pre($pre->last()->prevAll()->length);     // 2
+pre($pre->item(1)->siblings()->length);   // 2
 ```
 
 **Method Maps**
@@ -199,6 +230,8 @@ Node $sibling                    $node.next(void)
 NodeCollection $nodeCollection   $node.prevAll(void)
 NodeCollection $nodeCollection   $node.nextAll(void)
 NodeCollection $nodeCollection   $node.siblings(void)
+// @notimplemented
+NodeCollection $nodeCollection   $node.find(string $selector)
 
 // Content methods
 Node $node                       $node.setInnerText(string $contents)
