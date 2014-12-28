@@ -12,11 +12,11 @@ Now, let's see what we can do it that sweet thing... :)
 - It does not use [PHP DOM](//php.net/book.dom)
 - "For now", it designed for only create and modify HTML/XML documents
 - Set your autoloder first to get it work well
-- See all method maps of objects after examples
+- See all method maps of objects after samples
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 
 
-**Example: HTML Documents**
+**Sample: HTML Documents**
 
 ```php
 // Create first Document node (default #document)
@@ -47,7 +47,7 @@ pre($html);
 <body><div class="cls1 cls2" style="color:#ff0;" id="theDiv">The DIV text...</div></body>
 ```
 
-**Example: XML Documents**
+**Sample: XML Documents**
 
 ```php
 // Create first Document node (set as xml)
@@ -74,6 +74,33 @@ pre($xml);
 // Result
 <?xml version="1.0" encoding="utf-8"?>
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
+```
+
+**Sample: A REST API Page**
+
+```php
+// Get user messages
+$app->request('GET /user/:id/messages', ['id' => 123], 
+    function($request, $response) use($app) {
+        // Built DOM Tree
+        $dom = new Dom\Dom();
+        $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
+        // Create root node
+        $nodeMessages = $doc->createElement('messages');    
+        foreach ($app->getUserMessages($request->id) as $message) {
+            // Append child nodes
+            $nodeMessage = $doc->createElement('message', [
+                'date' => $message->date,
+                'read' => $message->read
+            ]);
+            // Or appendCData if needed
+            $nodeMessage->appendText($message->text);
+            $nodeMessage->appendTo($nodeMessages);
+        }
+        // Get output
+        $xml = $doc->toString();
+        $response->send($xml);
+});
 ```
 
 **Method Map of `Dom\Node\Node`**
