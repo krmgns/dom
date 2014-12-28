@@ -139,7 +139,7 @@ Node $node                       $node.appendComment(string $contents)
 Node $node                       $node.appendCData(string $contents)
 
 // Clone method
-Node $clone                      $clone.doClone(bool $deep = false)
+Node $clone                      $clone.doClone(bool $deep=false)
 
 // Controller methods
 bool                             $node.hasChildren(void)
@@ -200,7 +200,7 @@ void                             $document.getElementsByTagName(string $tagName)
 void                             $document.getElementsByClassName(string $className)
 // @notimplemented
 void                             load(string $html)
-void                             save()
+void                             save(void)
 ```
 
 ** `\Dom\Node\Element` extends `\Dom\Node\Node`
@@ -214,7 +214,7 @@ string                           $element.getClassText(void)
 ClassCollection $classCollection $element.getClassCollection(void)
 
 // Style methods
-Element $element                 $element.setStyle(string|array $name, $value = null)
+Element $element                 $element.setStyle(string|array $name, $value=null)
 string                           $element.getStyle($name)
 Element $element                 $element.removeStyle(string $name)
 string                           $element.getStyleText(void)
@@ -225,7 +225,7 @@ StyleCollection $styleCollection $element.getStyleCollection(void)
 
 ```php
 void                             $sub.setContent(string $content)
-string                           $sub.getContent()
+string                           $sub.getContent(void)
 ```
 
 ** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`<br>
@@ -249,7 +249,7 @@ abstract string                  toString(void)
 ** `\Dom\Node\Attribute` extends `\Dom\Patterns\AbstractElementProperty`
 
 ```php
-bool                             $sub.isId()
+bool                             $sub.isId(void)
 ```
 
 ** `\Dom\Node\NodeCollection` extends `\Dom\Collection`<br>
@@ -266,8 +266,8 @@ mixed $value|throw               __get(string $name)
 Collection $collection           $sub.add(mixed $item)
 Collection $collection           $sub.del(int $i)
 Collection $collection           $sub.delAll(void)
-mixed                            $sub.pop()
-mixed                            $sub.shift()
+mixed                            $sub.pop(void)
+mixed                            $sub.shift(void)
 Collection $collection           $sub.put(int $i, mixed $item)
 Collection $collection           $sub.append(mixed $item)
 Collection $collection           $sub.prepend(mixed $item)
