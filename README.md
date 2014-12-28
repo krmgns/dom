@@ -65,21 +65,61 @@ pre($xml);
 
 ```php
 // Modifier methods
-Node $parent    $parent.append(Node $child)
-Node $parent    $parent.prepend(Node $child)
-Node $new       $old.replace(Node $new)
-Node $parent    $parent.replaceChild(Node $new, Node $new)
-Node $target    $target.before(Node $sibling)
-Node $target    $target.after(Node $sibling)
-Node $child     $child.appendTo(Node $parent)
-Node $child     $child.prependTo(Node $parent)
-Node $new       $new.appendAfter(Node $target)
-Node $new       $new.appendBefore(Node $target)
-Node $parent    $parent.remove(Node $child)
-Node $node      $node.doEmpty(void)
-Node $node      $node.appendText(string $contents)
-Node $node      $node.appendComment(string $contents)
-Node $node      $node.appendCData(string $contents)
+Node $parent                     $parent.append(Node $child)
+Node $parent                     $parent.prepend(Node $child)
+Node $new                        $old.replace(Node $new)
+Node $parent                     $parent.replaceChild(Node $new, Node $new)
+Node $target                     $target.before(Node $sibling)
+Node $target                     $target.after(Node $sibling)
+Node $child                      $child.appendTo(Node $parent)
+Node $child                      $child.prependTo(Node $parent)
+Node $new                        $new.appendAfter(Node $target)
+Node $new                        $new.appendBefore(Node $target)
+Node $parent                     $parent.remove(Node $child)
+Node $node                       $node.doEmpty(void)
+Node $node                       $node.appendText(string $contents)
+Node $node                       $node.appendComment(string $contents)
+Node $node                       $node.appendCData(string $contents)
+
+// Clone method
+Node $clone                      $clone.doClone(bool $deep = false)
+
+// Controller methods
+bool                             $node.hasChildren(void)
+bool                             $node.hasAttributes(void)
+
+// Attribute methods
+Node $node                       $node.setAttributeObject(Attribute $attribute)
+Attribute $attribute             $node.getAttributeObject(string name)
+Node $node                       $node.setAttribute(string $name, mixed $value = null)
+bool                             $node.hasAttribute(string $name)
+string                           $node.getAttribute(string $name)
+Node $node                       $node.removeAttribute(string $name)
+
+// Walker methods
+Node $child                      $node.item(int $i)
+Node $child                      $node.first(void)
+Node $child                      $node.last(void)
+Node $child                      $node.last(void)
+Node $sibling                    $node.prev(void)
+Node $sibling                    $node.next(void)
+NodeCollection $nodeCollection   $node.prevAll(void)
+NodeCollection $nodeCollection   $node.nextAll(void)
+NodeCollection $nodeCollection   $node.siblings(void)
+
+// Content methods
+Node $node                       $node.setInnerText(string $contents)
+string                           $node.getInnerText(void)
+
+// Misc. methods
+string                           $node.getPath(void)
+string                           $node.toString(void)
+void                             $node.setParent(Node $parent = null)
+void                             $node.setOwnerDocument(Document $ownerDocument = null)
+bool                             $node.isChildOf(Node $target)
+bool                             $node.isParentOf(Node $target)
+bool                             $node.isSameNode(Node $target)
+bool                             $node.isSelfClosing(void)
 ```
 
 
