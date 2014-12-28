@@ -1,6 +1,6 @@
 **NOT COMPLETED!**
 
-As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple to work with it.
+As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple and easy to work with it.
 
 So, DOM object creates HTML and XML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g AJAX files that returns contents in HTML or XML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
 
@@ -96,8 +96,8 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
                 'date' => $message->date,
                 'read' => $message->read
             ]);
-            // Set inner text
-            $messageNode->appendText($message->text); // Or appendCData if needed
+            // Set inner text (or appendCData if needed)
+            $messageNode->appendText($message->text);
             // Append child node into root node
             $messageNode->appendTo($messagesNode);
         }
