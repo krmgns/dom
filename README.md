@@ -2,7 +2,7 @@
 
 As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple and easy to work with it.
 
-So, DOM object creates HTML and XML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g AJAX files that returns contents in HTML or XML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
+So, DOM object creates HTML and XML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g REST endpoints or AJAX pages that returns contents in HTML or XML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
 
 Now, let's see what we can do it that sweet thing... :)
 
