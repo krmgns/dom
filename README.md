@@ -12,29 +12,30 @@
 ** HTML Documents
 
 ```php
-// Create first #document node
+// Create first Document node (default #document)
 $dom = new Dom\Dom();
 $doc = $dom->document();
 
-// Create <body>
+// Create <body> node and append into Document node
 $body = $doc->createElement('body');
+$body->appendTo($doc);
 
-// Add some child nodes into <body>
+// Create <div> node
 $div = $doc->createElement('div', [
     'id' => 'theDiv',
     'class' => 'cls1 cls2',
     'style' => ['color' => '#ff0']
 ], 'The DIV text...');
 
-// Node.appendChild
+// Append <div> into <body>
 $body->append($div);
 // Or $div->appendTo($body);
 
-// And get #document contents as HTML output
+// And get Document contents as HTML output
 $html = $doc->toString();
 pre($html);
 
-// Gives
+// Result
 <!DOCTYPE html>
 <body><div class="cls1 cls2" style="color:#ff0;" id="theDiv">The DIV text...</div></body>
 ```
@@ -42,21 +43,26 @@ pre($html);
 ** XML Documents
 
 ```php
+// Create first Document node (set as xml)
 $dom = new Dom\Dom();
 $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
 
+// Create <fruits> node and into Document node
 $fruits = $doc->createElement('fruits');
-$apples = $doc->createElement('apples')
-    ->append($doc->createElement('apple', ['color' => 'yellow'], '', true))
-    ->append($doc->createElement('apple', ['color' => 'green'], '', true))
-    ->appendTo($fruits);
-
 $fruits->appendTo($doc);
 
+// Create <fruit> nodes and append into <fruits> node
+$apples = $doc->createElement('apples')
+    // args: "nodeName", "attributes", "nodeValue", "selfClosing?"
+    ->append($doc->createElement('apple',    ['color' => 'yellow'], null, true))
+    ->append($doc->createElement('apple',    ['color' => 'green'],  null, true))
+    ->appendTo($fruits);
+
+// And get Document contents as XML output
 $xml = $doc->toString();
 pre($xml);
 
-// Gives
+// Result
 <?xml version="1.0" encoding="utf-8"?>
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
