@@ -20,7 +20,7 @@ Now, let's see what we can do with that sweet thing... :)
 
 ```php
 // Create first Document node (default #document)
-$dom = new Dom\Dom();
+$dom = new \Dom\Dom();
 $doc = $dom->document();
 
 // Create <body> node and append into Document node
@@ -51,8 +51,8 @@ pre($html);
 
 ```php
 // Create first Document node (set as xml)
-$dom = new Dom\Dom();
-$doc = $dom->document(Dom\Node\Document::DOCTYPE_XML);
+$dom = new \Dom\Dom();
+$doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
 // With more args: "doctype def=xml", "encoding def=utf-8", "version def=1.0"
 // $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML, "utf-16", "1.1");
 
@@ -111,7 +111,7 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
 
 **Method Maps**
 
-** `Dom\Node\Node`
+** `\Dom\Node\Node`
 
 ```php
 // Modifier methods
@@ -141,7 +141,7 @@ bool                             $node.hasAttributes(void)
 // Attribute methods
 Node $node                       $node.setAttributeObject(Attribute $attribute)
 Attribute $attribute             $node.getAttributeObject(string name)
-Node $node                       $node.setAttribute(string $name, mixed $value = null)
+Node $node                       $node.setAttribute(string|array $name, mixed $value = null)
 bool                             $node.hasAttribute(string $name)
 string                           $node.getAttribute(string $name)
 Node $node                       $node.removeAttribute(string $name)
@@ -172,4 +172,15 @@ bool                             $node.isSameNode(Node $target)
 bool                             $node.isSelfClosing(void)
 ```
 
+** `\Dom\Node\DocumentType` extends `\Dom\Node\Node`
 
+```php
+void                             $doctype.addDoctypeString(bool)
+```
+
+** `\Dom\Node\Document` extends `\Dom\Node\Node`
+
+```php
+// proxy for $document.doctype.addDoctypeString()
+void                             $document.addDoctypeString(bool)
+```
