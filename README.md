@@ -109,6 +109,42 @@ $app->get('/user/:id/messages', ['id' => 123], function($request, $response) use
 });
 ```
 
+**Node attributes**
+
+```php
+// simple
+$div->setAttribute('data-foo', 'The Foo!');
+prd($div->hasAttribute('data-foo'));
+prd($div->getAttribute('data-foo'));
+$div->removeAttribute('data-foo');
+prd($div->hasAttribute('data-foo'));
+prd($div->getAttribute('data-foo'));
+// set object
+$div->setAttributeObject(new \Dom\Node\Attribute('data-foo', 'The Foo!', $div));
+// or 
+$atr = new \Dom\Node\Attribute('data-foo', 'The Foo!');
+$atr->setOwnerElement($div);
+$div->setAttributeObject($atr);
+prd($div->getAttribute('data-foo'));
+```
+
+**Element style/class**
+
+```php
+// Add, remove and get style text
+$div->setStyle('width', '330px');
+$div->removeStyle('color');
+prd($div->getStyle('color'));
+prd($div->getStyle('width'));
+
+// Add, remove, check and get class text
+$div->addClass('cls3');
+$div->removeClass('cls1');
+prd($div->hasClass('cls1'));
+prd($div->hasClass('cls2'));
+prd($div->getClassText());
+```
+
 **Method Maps**
 
 ** `\Dom\Dom`
@@ -238,7 +274,7 @@ string                           $sub.getContent(void)
 throw                            __set(string $name, string $value)
 string $name|$value|throw        __get(string $name)
 void                             $sub.setOwnerElement(Element $ownerElement=null)
-Element $this.ownerElement       $sub.getOwnerElement(Element $ownerElement=null)
+Element $ownerElement            $sub.getOwnerElement(void)
 string                           $sub.getName(void)
 string                           $sub.getValue(void)
 abstract string                  toString(void)
