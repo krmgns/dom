@@ -76,7 +76,7 @@ pre($xml);
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
 
-**Sample: REST API Page**
+**Sample: REST Page**
 
 ```php
 // Get user messages
@@ -190,7 +190,7 @@ void                             $doctype.addDoctypeString(bool)
 ```php
 void                             $document.addDoctypeString(bool) // proxy: $document.doctype.addDoctypeString()
 Element $element                 $document.createElement(string $tag, array $attributes=null, $text='', $selfClosing=null) {
-Node $node                       $document.create(\Dom\Node\Node.TYPE_(ELEMENT|TEXT|CDATA|COMMENT) $type, string $contents)
+Node $node                       $document.create(\Dom\Node\Node.TYPE_(TEXT|CDATA|COMMENT) $type, string $contents)
 Node $text                       $document.createText(string $contents)
 Node $cData                      $document.createCData(string $contents)
 Node $comment                    $document.createComment(string $contents)
@@ -228,8 +228,8 @@ void                             $sub.setContent(string $content)
 string                           $sub.getContent()
 ```
 
-** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
-** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
+** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`<br>
+** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`<br>
 ** `\Dom\Node\Comment` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
 
 ** `\Dom\Patterns\AbstractElementProperty`
@@ -241,7 +241,7 @@ void                             $sub.setOwnerElement(Element $ownerElement=null
 Element $this.ownerElement       $sub.getOwnerElement(Element $ownerElement=null)
 string                           $sub.getName(void)
 string                           $sub.getValue(void)
-abstract                         toString(void)
+abstract string                  toString(void)
 ```
 
 ** `\Dom\Node\Style` extends `\Dom\Patterns\AbstractElementProperty`
@@ -250,12 +250,12 @@ abstract                         toString(void)
 
 ```php
 bool                             $sub.isId()
-
-** `\Dom\Node\NodeCollection` extends `\Dom\Collection`
-** `\Dom\Node\StyleCollection` extends `\Dom\Collection`
-** `\Dom\Node\ClassCollection` extends `\Dom\Collection`
-** `\Dom\Node\AttributeCollection` extends `\Dom\Collection`
 ```
+
+** `\Dom\Node\NodeCollection` extends `\Dom\Collection`<br>
+** `\Dom\Node\StyleCollection` extends `\Dom\Collection`<br>
+** `\Dom\Node\ClassCollection` extends `\Dom\Collection`<br>
+** `\Dom\Node\AttributeCollection` extends `\Dom\Collection`
 
 ** `\Dom\Collection` implements `\Countable, \IteratorAggregate, \ArrayAccess`
 
