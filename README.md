@@ -14,6 +14,26 @@ Now, let's see what we can do with that sweet thing... :)
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 (only samples contain 5.4 features, e.g `[]` arrays)
 
+
+**Copying**
+
+```bash
+# clone dom
+$ cd /var/www/<PROJECTPATH>
+$ git clone git@github.com:qeremy/dom.git && cd dom
+
+# install composer
+$ curl -sS https://getcomposer.org/installer | php
+composer.phar update
+```
+
+**Autoload**
+
+```php
+$loader = require('vendor/autoload.php');
+$loader->add('Dom\\', __dir__.'/dom');
+```
+
 **Sample: HTML Documents**
 
 ```php
