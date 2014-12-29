@@ -1,7 +1,7 @@
 {
     "name": "qeremy/dom",
     "type": "library",
-    "version": "v0.1",
+    "version": "0.1",
     "homepage": "http://github.com/qeremy/dom",
     "description": "PHP DOM object that creates XML/HTML documents on the fly.",
     "keywords": ["dom", "xml", "html"],
