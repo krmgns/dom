@@ -31,8 +31,8 @@ composer.phar update
 
 ```php
 // In your project
-$loader = require('vendor/autoload.php');
-$loader->add('Dom\\', __dir__.'/dom');
+$loader = require(__dir__.'/dom/vendor/autoload.php');
+$loader->add('Dom\\', __dir__);
 ```
 
 **Sample: HTML Documents**
