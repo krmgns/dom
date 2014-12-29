@@ -15,6 +15,10 @@ function prd($input, $exit = false){
     }
 }
 
+// Autoload
+// $loader = require('vendor/autoload.php');
+// $loader->add('Dom\\', __dir__);
+
 spl_autoload_register(function($name) {
     require(sprintf('%s/%s.php', __dir__, ltrim(str_replace('\\', '/', $name), '/')));
 });
