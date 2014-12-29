@@ -211,7 +211,7 @@ Document $document $dom.document(
 Node $parent                     $parent.append(Node $child)
 Node $parent                     $parent.prepend(Node $child)
 Node $new                        $old.replace(Node $new)
-Node $parent                     $parent.replaceChild(Node $new, Node $new)
+Node $parent                     $parent.replaceChild(Node $oldChild, Node $newChild)
 Node $target                     $target.before(Node $sibling)
 Node $target                     $target.after(Node $sibling)
 Node $child                      $child.appendTo(Node $parent)
