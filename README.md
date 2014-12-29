@@ -19,7 +19,7 @@ Now, let's see what we can do with that sweet thing... :)
 
 ```bash
 # clone dom
-$ cd /var/www/<PROJECTPATH>
+$ cd /var/www/<PROJECT>
 $ git clone git@github.com:qeremy/dom.git && cd dom
 
 # install composer
