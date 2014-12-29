@@ -74,7 +74,7 @@ pre($xml);
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
 
-**Sample: REST Page**
+**Sample: REST Page (as an idea)**
 
 ```php
 // Get user messages
