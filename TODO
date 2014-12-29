@@ -1,0 +1,5 @@
+- Add html parser for
+- Implement load() and save()
+- Implement getElement*()
+- Implement find()
+- More easy access to $element->style['color'] or $element->style->color (__set/__get in Element)
