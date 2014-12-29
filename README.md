@@ -30,6 +30,7 @@ composer.phar update
 **Autoload**
 
 ```php
+// In your project
 $loader = require('vendor/autoload.php');
 $loader->add('Dom\\', __dir__.'/dom');
 ```
