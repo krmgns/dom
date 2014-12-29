@@ -12,7 +12,7 @@ Now, let's see what we can do with that sweet thing... :)
 - Set your autoloader first to get it work well
 - See all method maps of objects after the samples
 - See `pre()` and `prd()` functions in `test.php`
-- Requires PHP >= 5.3 (only samples contain 5.4 features, e.g `[]` arrays)
+- Requires PHP >= 5.3 (samples contain 5.4 features, e.g `[]` arrays)
 
 
 **Copying**
