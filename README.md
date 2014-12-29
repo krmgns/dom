@@ -1,6 +1,6 @@
 As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple and easy to work with it.
 
-So, DOM object creates XML/HTML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g. REST endpoints or AJAX pages that returns contents in XML/HTML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in string quotes (").
+So, DOM object creates XML/HTML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g. REST endpoints or AJAX pages that returns contents in XML/HTML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in the string quotes (").
 
 Now, let's see what we can do with that sweet thing... :)
 
@@ -10,7 +10,7 @@ Now, let's see what we can do with that sweet thing... :)
 - It does not use [PHP DOM](//php.net/book.dom) Library
 - "JUST FOR NOW", it designed for only create and modify XML/HTML documents (will be extended for Parse/Query supports)
 - Set your autoloader first to get it work well
-- See all method maps of objects after samples
+- See all method maps of objects after the samples
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 (only samples contain 5.4 features, e.g `[]` arrays)
 
