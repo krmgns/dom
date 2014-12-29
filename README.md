@@ -8,7 +8,7 @@ Now, let's see what we can do with that sweet thing... :)
 
 - It is not 100% implementation of [WC3 DOM specs](//www.w3.org/DOM) (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
 - It does not use [PHP DOM](//php.net/book.dom) Library
-- "JUST FOR NOW", it designed for only create and modify XML/HTML documents (will be extended for Parse/Query supports)
+- "For now", it designed for only create and modify XML/HTML documents (will be extended for Parse/Query supports)
 - Set your autoloader first to get it work well
 - See all method maps of objects after the samples
 - See `pre()` and `prd()` functions in `test.php`
