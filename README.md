@@ -99,7 +99,7 @@ pre($xml);
 
 ```php
 // Get user messages
-$app->get('/user/:id/messages', ['id' => 123], function($request, $response) use($app) {
+$app->get('/user/:id/messages', function($request, $response) use($app) {
     // Built DOM Tree
     $dom = new \Dom\Dom();
     $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
