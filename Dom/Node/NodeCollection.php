@@ -34,10 +34,3 @@ namespace Dom\Node;
  */
 class NodeCollection
     extends \Dom\Collection {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/NodeCollection.php
- * @tabs Space=4 (Sublime Text 3)
- */

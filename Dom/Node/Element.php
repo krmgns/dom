@@ -39,46 +39,45 @@ class Element
     extends Node
 {
     /**
-     * Id attribute property
-     *
-     * @var str
+     * Id attribute property.
+     * @var string
      */
     protected $id;
 
     /**
-     * Tag name property
-     *
-     * @var str
+     * Tag name property.
+     * @var string
      */
     protected $tag;
 
     /**
-     * Create a new Element object
+     * Create a new Element object.
      *
-     * @param  str        $tag         (tagName)
+     * @param  string     $tag         (tagName)
      * @param  array|null $attributes
-     * @param  str        $text        (innerText aka textContent)
-     * @param  bool       $selfClosing (used for manual self closing option for xml nodes)
+     * @param  string     $text        (innerText aka textContent)
+     * @param  boolean    $selfClosing (used for manual self closing option for xml nodes)
      * @return self
      */
     public function __construct($tag, $value = null, array $attributes = null, $selfClosing = null) {
-        // Check tag name
+        // check tag name
         if (!preg_match('~^[\w-]+$~i', $tag)) {
             throw new Error\Node('Not proper tag name!');
         }
-        // Set tag name
+
+        // set tag name
         $this->tag = $tag;
 
-        // Call parent initor
+        // call parent initor
         parent::__construct($tag, $value, Node::TYPE_ELEMENT);
 
-        // Overwrite selfClosing if provided
-        // Generally used for xml nodes that contains no body
+        // overwrite selfclosing if provided
+        // generally used for xml nodes that contains no body
         if (is_bool($selfClosing)) {
             $this->selfClosing = $selfClosing;
         }
 
-        // Init class/style attributes
+        // init class/style attributes
         if (!isset($this->attributes->class)) {
             $this->setAttribute(self::ATTRIBUTE_NAME_CLASS, new ClassCollection());
         }
@@ -86,14 +85,16 @@ class Element
             $this->setAttribute(self::ATTRIBUTE_NAME_STYLE, new StyleCollection());
         }
 
-        // Set attributes if provided
+        // set attributes if provided
         if (!empty($attributes)) {
             foreach ($attributes as $name => $value) {
-                // Set id
+                // set id
                 if (!isset($this->id) && $name == 'id') {
                     $this->id = $value;
+                    continue;
                 }
-                // Set classes/styles/attributes
+
+                // set classes/styles/attributes
                 if ($name == self::ATTRIBUTE_NAME_CLASS) {
                     $this->addClass($value);
                 } elseif ($name == self::ATTRIBUTE_NAME_STYLE) {
@@ -106,45 +107,46 @@ class Element
     }
 
     /**
-     * Check class exists
+     * Check class exists.
      *
-     * @param  str  $name
-     * @return bool
+     * @param  string  $name
+     * @return boolean
      */
     public function hasClass($name) {
         return in_array($name, $this->getClassCollection()->toArray());
     }
 
     /**
-     * Add new class to element (remove duplicate classes)
+     * Add new class to element (remove duplicate classes).
      *
      * @param self
      */
     public function addClass($value) {
-        // Value could be array
+        // value could be array
         if (is_array($value)) {
             foreach ($value as $val) {
                 $this->addClass($val);
             }
+
             return $this;
         }
 
-        // If class passed with spaces
+        // if class passed with spaces
         if (strpos($value, ' ') !== false) {
             $value = preg_split('~\s+~', $value, -1, PREG_SPLIT_NO_EMPTY);
             return $this->addClass($value);
         }
 
-        // Add class into ClassCollection and remove duplicates
+        // add class into classcollection and remove duplicates
         $this->getClassCollection()->append($value)->unique();
 
         return $this;
     }
 
     /**
-     * Remove a class from element
+     * Remove a class from element.
      *
-     * @param  str $name
+     * @param  string $name
      * @return self
      */
     public function removeClass($name) {
@@ -156,19 +158,19 @@ class Element
     }
 
     /**
-     * Get (all) class text
+     * Get (all) class text.
      *
-     * @return str
+     * @return string
      */
     public function getClassText() {
         return join(' ', $this->getClassCollection()->toArray());
     }
 
     /**
-     * Get element's ClassCollection
+     * Get element's ClassCollection.
      *
-     * @return ClassCollection
-     * @throws Error\Instance (if no classes)
+     * @throws Error\Instance
+     * @return ClassCollection.
      */
     public function getClassCollection() {
         foreach ($this->attributes as $attribute) {
@@ -176,36 +178,40 @@ class Element
                 return $attribute->value;
             }
         }
+
         throw new Error\Instance(
             'Class attributes must be instance of Dom\\Node\\ClassCollection');
     }
 
     /**
-     * Set style (if already exists replace new value)
+     * Set style (if already exists replace new value).
      *
-     * @param str|array $name
-     * @param mix self
+     * @param  string|array $name
+     * @param  mixed|null   $value
+     * @return self
      */
     public function setStyle($name, $value = null) {
         if (is_array($name)) {
             foreach ($name as $key => $val) {
                 $this->setStyle($key, $val);
             }
+
             return $this;
         }
-        // Remove style
+
+        // remove style
         $this->removeStyle($name);
-        // Add style
+        // add style
         $this->getStyleCollection()->add(new Style($name, $value, $this));
 
         return $this;
     }
 
     /**
-     * Get style value
+     * Get style value.
      *
-     * @param  str $name
-     * @return str|null
+     * @param  string $name
+     * @return string|null
      */
     public function getStyle($name) {
         foreach ($this->getStyleCollection() as $style) {
@@ -216,9 +222,9 @@ class Element
     }
 
     /**
-     * Remove style from list
+     * Remove style from list.
      *
-     * @param  str $name
+     * @param  string $name
      * @return Element
      */
     public function removeStyle($name) {
@@ -240,9 +246,9 @@ class Element
     }
 
     /**
-     * Get plain style text (e.g: "color: #fff; width: 10px;")
+     * Get plain style text (e.g: "color: #fff; width: 10px;").
      *
-     * @return str
+     * @return string
      */
     public function getStyleText() {
         $text   = '';
@@ -254,10 +260,10 @@ class Element
     }
 
     /**
-     * Get style collection
+     * Get style collection.
      *
+     * @throws Error\Instance
      * @return StyleCollection
-     * @throws Error\Instance (if no styles)
      */
     public function getStyleCollection() {
         foreach ($this->attributes as $attribute) {
@@ -265,14 +271,8 @@ class Element
                 return $attribute->value;
             }
         }
+
         throw new Error\Instance(
             'Style attributes must be instance of Dom\\Node\\StyleCollection');
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/Element.php
- * @tabs Space=4 (Sublime Text 3)
- */

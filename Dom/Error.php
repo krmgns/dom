@@ -36,23 +36,16 @@ class Error
     extends \Exception
 {
     /**
-     * Create a new Error object
+     * Create a new Error object.
      */
     public function __construct() {
-        // Set message
+        // set message
         $args = func_get_args();
         $mesg = count($args) == 1
             ? "\n ". $args[0] ."\n"
             : "\n ". vsprintf(array_shift($args), $args) ."\n";
 
-        // Call parent init
+        // call parent init
         parent::__construct($mesg);
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Error.php
- * @tabs Space=4 (Sublime Text 3)
- */

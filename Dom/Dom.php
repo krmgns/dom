@@ -37,11 +37,11 @@ use \Dom\Node\Document;
 class Dom
 {
     /**
-     * Create a new Document object
+     * Create a new Document object.
      *
-     * @param  str $doctype
-     * @param  str $encoding
-     * @param  str $version
+     * @param  string $doctype
+     * @param  string $encoding
+     * @param  string $version
      * @return Dom\Node\Document
      */
     public function document(
@@ -49,14 +49,7 @@ class Dom
         $encoding = Document::DEFAULT_ENCODING,
         $version  = null
     ) {
-        // Return plain document
+        // return plain document
         return new Document($doctype, $encoding, $version);
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Dom.php
- * @tabs Space=4 (Sublime Text 3)
- */

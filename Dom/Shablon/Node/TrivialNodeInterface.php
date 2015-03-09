@@ -30,29 +30,20 @@ namespace Dom\Shablon\Node;
  * @object  Dom\Shablon\Node\TrivialNodeInterface
  * @version 1.1
  * @author  Kerem Gunes <qeremy@gmail>
- *
- * @interface
  */
 interface TrivialNodeInterface
 {
     /**
-     * Set node content
+     * Set node content.
      *
-     * @param  str $content
+     * @param string $content
      */
     public function setContent($content);
 
     /**
-     * Get node content
+     * Get node content.
      *
-     * @return str
+     * @return string
      */
     public function getContent();
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Shablon/TrivialNodeInterface.php
- * @tabs Space=4 (Sublime Text 3)
- */

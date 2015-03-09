@@ -34,10 +34,3 @@ namespace Dom\Error;
  */
 class Instance
     extends \Dom\Error {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Error/Instance.php
- * @tabs Space=4 (Sublime Text 3)
- */

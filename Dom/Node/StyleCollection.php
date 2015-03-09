@@ -39,24 +39,18 @@ class StyleCollection
     extends \Dom\Collection
 {
     /**
-     * Check for item type
+     * Check for item type.
      *
-     * @param  str  $item
+     * @param  string $item
+     * @throws Dom\Error\Instance
      * @return self.parent
-     * @throws  Error\Instance (if item type is not Style)
      */
     public function add($item) {
         // Overwrite for "DI" option
         if (!$item instanceof Style) {
             throw new Error\Instance('Item must be instance of Dom\\Node\\Style!');
         }
+
         return parent::add($item);
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/StyleCollection.php
- * @tabs Space=4 (Sublime Text 3)
- */

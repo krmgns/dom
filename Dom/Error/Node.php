@@ -34,10 +34,3 @@ namespace Dom\Error;
  */
 class Node
     extends \Dom\Error {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Error/Node.php
- * @tabs Space=4 (Sublime Text 3)
- */

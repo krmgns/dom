@@ -39,11 +39,11 @@ class ClassCollection
     extends \Dom\Collection
 {
     /**
-     * Check for item type
+     * Check for item type.
      *
-     * @param  str  $item
-     * @return self.parent
-     * @throws Error\Instance (if item type is not string)
+     * @param  string $item
+     * @throws Dom\Error\Instance
+     * @return parent
      */
     public function append($item) {
         // Overwrite for "DI" option
@@ -54,10 +54,3 @@ class ClassCollection
         return parent::append($item);
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/ClassCollection.php
- * @tabs Space=4 (Sublime Text 3)
- */

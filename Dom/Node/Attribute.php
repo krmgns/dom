@@ -36,9 +36,9 @@ class Attribute
     extends \Dom\Shablon\Node\ElementProperty
 {
     /**
-     * Return formatted string contents of name/value
+     * Return formatted string contents of name/value.
      *
-     * @return str
+     * @return string
      */
     public function toString() {
         return sprintf('%s="%s"',
@@ -46,18 +46,11 @@ class Attribute
     }
 
     /**
-     * Check name property is "id" or not
+     * Check name property is 'id' or not.
      *
-     * @return bool
+     * @return boolean
      */
     public function isId() {
         return strtolower($this->name) == 'id';
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/Attribute.php
- * @tabs Space=4 (Sublime Text 3)
- */

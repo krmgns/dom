@@ -40,34 +40,25 @@ class DocumentType
 {
     /**
      * Prepend doctype xml/html as string?
-     *
      * @var bool
      */
     protected $addDoctypeString = true;
 
     /**
-     * Create a new DocumentType object
-     *
-     * @param str $name
+     * Create a new DocumentType object.
+     * @param string $name
      */
     public function __construct($name) {
         parent::__construct($name, null, Node::TYPE_DOCUMENT_TYPE);
     }
 
     /**
-     * Set will return doctype as string or not (for xml/html autputs)
+     * Set will return doctype as string or not (for xml/html autputs).
      *
-     * @param  bool $option
+     * @param  boolean $option
      * @return void
      */
     public function addDoctypeString($option) {
         $this->addDoctypeString = (bool) $option;
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/DocumentType.php
- * @tabs Space=4 (Sublime Text 3)
- */

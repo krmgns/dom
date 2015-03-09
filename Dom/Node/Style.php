@@ -36,18 +36,11 @@ class Style
     extends \Dom\Shablon\Node\ElementProperty
 {
     /**
-     * Return formatted string contents of name/value
+     * Return formatted string contents of name/value.
      *
-     * @return str
+     * @return string
      */
     public function toString() {
         return sprintf('%s:%s;',  $this->name, $this->value);
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/Style.php
- * @tabs Space=4 (Sublime Text 3)
- */

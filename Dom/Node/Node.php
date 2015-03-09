@@ -37,9 +37,8 @@ use \Dom\Error;
 class Node
 {
     /**
-     * Node types
-     *
-     * @const int
+     * Node types.
+     * @const integer
      */
     const TYPE_ELEMENT                = 1,
           TYPE_TEXT                   = 3,
@@ -47,7 +46,7 @@ class Node
           TYPE_COMMENT                = 8,
           TYPE_DOCUMENT               = 9,
           TYPE_DOCUMENT_TYPE          = 10,
-          // These type are not used in this programs
+          // these type are not used in this programs
           TYPE_ATTRIBUTE              = 2,  // @deprecated
           TYPE_CDATA_SECTION          = 4,  // @deprecated
           TYPE_ENTITY_REFERENCE       = 5,  // @deprecated
@@ -57,82 +56,70 @@ class Node
           TYPE_NOTATION               = 12; // @deprecated
 
     /**
-     * Attribute names
-     *
-     * @const str
+     * Attribute names.
+     * @const string
      */
     const ATTRIBUTE_NAME_CLASS        = 'class',
           ATTRIBUTE_NAME_STYLE        = 'style';
 
     /**
-     * Clone hash stack for self.isCloneOf()
-     *
+     * Clone hash stack for self.isCloneOf().
      * @var array
      */
     protected static $cloneHashes = array();
 
     /**
-     * Node name
-     *
-     * @var str
+     * Node name.
+     * @var string
      */
     protected $name;
 
     /**
      * Node value
-     *
-     * @var str|null
+     * @var string|null
      */
     protected $value;
 
     /**
      * Node type
      *
-     * @var int
+     * @var integer
      */
     protected $type;
 
     /**
-     * Child nodes
-     *
+     * Child nodes.
      * @var NodeCollection
      */
     protected $children;
 
     /**
-     * Child nodes
-     *
+     * Child nodes.
      * @var AttributeCollection
      */
     protected $attributes;
 
     /**
-     * Parent node
-     *
+     * Parent node.
      * @var Node
      */
     protected $parent;
 
     /**
-     * Owner document
-     *
+     * Owner document.
      * @var Document
      */
     protected $ownerDocument;
 
     /**
-     * Self-closing
-     *
-     * Used for auto-detect self-closing html nodes
-     * Could be set manually for xml nodes, see Element
-     *
-     * @var bool
+     * Self-closing. Used for auto-detecting self-closing html
+     * nodes could be set manually for xml nodes, see Element
+     * @var boolean
      */
     protected $selfClosing = false;
 
     /**
-     * Self-closing html tags
-     *
+     * Self-closing HTML tags.
      * @var array
      */
     public static $selfClosings = array(
@@ -142,43 +129,44 @@ class Node
     );
 
     /**
-     * Create a new Node object
+     * Create a new Node object.
      *
-     * @param str $name
-     * @param str|null $value
-     * @param int $type
+     * @param string      $name
+     * @param string|null $value
+     * @param integer     $type
      */
     public function __construct($name, $value = null, $type = self::TYPE_ELEMENT) {
-        // Init vars
+        // init vars
         $this->name  = strtolower($name);
         $this->value = $value;
         $this->type  = $type;
-        // Except #text|comment|cdata|documentType
+        // except #text|comment|cdata|documenttype
         if ($type == self::TYPE_ELEMENT || $type == self::TYPE_DOCUMENT) {
-            // Self-closing?
+            // self-closing?
             $this->selfClosing = in_array($name, self::$selfClosings);
-            // Init collections
+            // init collections
             $this->children    = new NodeCollection();
             $this->attributes  = new AttributeCollection();
         }
     }
 
     /**
-     * Return property if exists
+     * Return property if exists.
      *
-     * @param  str $name
-     * @return mix
-     * @throw  Error\Property (if property does not exists)
+     * @param  string $name
+     * @throws Error\Property
+     * @return mixed
      */
     public function __get($name) {
         if (property_exists($this, $name)) {
             return $this->{$name};
         }
+
         throw new Error\Property('Property does not exists! name: %s', $name);
     }
 
     /**
-     * Store clone hashes (used in self.isCloneOf())
+     * Store clone hashes, used in self.isCloneOf().
      *
      * @return void
      */
@@ -187,7 +175,7 @@ class Node
     }
 
     /**
-     * Set parent node
+     * Set parent node.
      *
      * @param  Node|null $parent
      * @return void
@@ -197,7 +185,7 @@ class Node
     }
 
     /**
-     * Set owner document
+     * Set owner document.
      *
      * @param  Document|null $ownerDocument
      * @return void
@@ -207,30 +195,30 @@ class Node
     }
 
     /**
-     * Check node is child of another node
+     * Check node is child of another node.
      *
      * @param  Node $node
-     * @return bool
+     * @return boolean
      */
     public function isChildOf(Node $target) {
         return ($this->parent == $target);
     }
 
     /**
-     * Check node is parent of another node
+     * Check node is parent of another node.
      *
      * @param  Node $target
-     * @return bool
+     * @return boolean
      */
     public function isParentOf(Node $target) {
         return ($this->children->index($target) !== null);
     }
 
     /**
-     * Check node is clone of another node
+     * Check node is clone of another node.
      *
      * @param  Node $target
-     * @return bool
+     * @return boolean
      */
     public function isCloneOf(Node $target) {
         return ($this == $target && $this !== $target
@@ -238,179 +226,191 @@ class Node
     }
 
     /**
-     * Check node is same node with another node
+     * Check node is same node with another node.
      *
      * @param  Node $target
-     * @return bool
+     * @return boolean
      */
     public function isSameNode(Node $target) {
         return ($this == $target);
     }
 
     /**
-     * Check node is self-closing node
+     * Check node is self-closing node.
      *
      * @param  Node $target
-     * @return bool
+     * @return boolean
      */
     public function isSelfClosing() {
         return (bool) $this->selfClosing;
     }
 
     /**
-     * Append a child node
+     * Append a child node.
      *
      * @param  Node $child
      * @return self
      */
     public function append(Node $child) {
-        // Check errors
+        // check errors
         $this->canInsert($child);
-        // Set parent
+        // set parent
         $child->setParent($this);
-        // Append
+        // append
         $this->children->append($child);
 
         return $this;
     }
 
     /**
-     * Prepend a child node
+     * Prepend a child node.
      *
      * @param  Node $child
      * @return self
      */
     public function prepend(Node $child) {
-        // Check errors
+        // check errors
         $this->canInsert($child);
-        // Set parent
+        // set parent
         $child->setParent($this);
-        // Prepend
+        // prepend
         $this->children->prepend($node);
 
         return $this;
     }
 
     /**
-     * Replace node with new node
+     * Replace node with new node.
      *
      * @param  Node $new
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if node has no parent | node's parent has not old node)
      */
     public function replace(Node $new) {
         $old = $this;
         if ($old->isSameNode($new)) {
             throw new Error\Node('These are same nodes!');
         }
-        // Check errors
+
+        // check errors
         if (isset($old->parent)) {
             if ($old->parent->hasChildren()) {
-                // Set parent
+                // set parent
                 $new->setParent($old->parent);
                 foreach ($old->parent->children as $i => $child) {
                     if ($child == $old) {
                         $old->parent->children->replace($i, $new);
+
                         return $new;
                     }
                 }
             }
+
             throw new Error\Node('Parent has no child such as old node!');
         }
+
         throw new Error\Node('Old node has no parent!');
     }
 
     /**
-     * Replace an old (child) node with new node
+     * Replace an old (child) node with new node.
      *
      * @param  Node $old
      * @param  Node $new
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if node has not old node)
      */
     public function replaceChild(Node $old, Node $new) {
         if ($this->hasChildren()) {
-            // Set parent
+            // set parent
             $new->setParent($this);
             foreach ($this->children as $i => $child) {
                 if ($child == $old) {
                     $this->children->replace($i, $new);
+
                     return $this;
                 }
             }
+
             throw new Error\Node('Parent has no child such as old node!');
         }
     }
 
     /**
-     * Prepend a sibling
+     * Prepend a sibling.
      *
      * @param  Node $sibling
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if target not appended to sibling's parent before)
      */
     public function before(Node $sibling) {
         $target = $this;
         if (isset($target->parent)) {
-            // Set parent
+            // set parent
             $sibling->setParent($target->parent);
             if ($target->parent->hasChildren()) {
                 foreach ($target->parent->children as $i => $child) {
                     if ($child == $target) {
                         $target->parent->children->put($i, $sibling);
+
                         return $target;
                     }
                 }
             }
         }
+
         throw new Error\Node('`%s` node cannot be insterted before `%s`. '.
             'Did you append first `%s` ($target)?', $sibling->name, $target->name, $target->name);
     }
 
     /**
-     * Append a sibling
+     * Append a sibling.
      *
      * @param  Node $sibling
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if target not appended to sibling's parent before)
      */
     public function after(Node $sibling) {
         $target = $this;
         if (isset($target->parent)) {
-            // Set parent
+            // set parent
             $sibling->setParent($target);
             if ($target->parent->hasChildren()) {
                 foreach ($target->parent->children as $i => $child) {
                     if ($child == $target) {
                         $target->parent->children->put($i + 1, $sibling);
+
                         return $target;
                     }
                 }
             }
         }
+
         throw new Error\Node('`%s` node cannot be insterted after `%s`. '.
             'Did you append first `%s` ($target)?', $sibling->name, $target->name, $target->name);
     }
 
     /**
-     * Append a child (self) to parent node
+     * Append a child (self) to parent node.
      *
      * @param  Node $parent
      * @return self
      */
     public function appendTo(Node $parent) {
         $parent->append($this);
+
         return $this;
     }
 
     /**
-     * Prepend a child (self) to parent node
+     * Prepend a child (self) to parent node.
      *
      * @param  Node $parent
      * @return self
      */
     public function prependTo(Node $parent) {
         $parent->prepend($this);
+
         return $this;
     }
 
@@ -418,68 +418,72 @@ class Node
      * Append a child to target's parent node
      *
      * @param  Node $target
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if target has no parent)
      */
     public function appendAfter(Node $target) {
         if (isset($target->parent)) {
-            // Set parent
+            // set parent
             $this->setParent($target->parent);
-            // Get index of target
+            // get index of target
             $i = (int) $target->parent->children->index($target);
-            // Put it into parent's children with specific index
+            // put it into parent's children with specific index
             $target->parent->children->put($i + 1, $this);
 
             return $this;
         }
+
         throw new Error\Node('Target node has no parent! node: `%s`', $target->name);
     }
 
     /**
-     * Prepend a child to target's parent node
+     * Prepend a child to target's parent node.
      *
      * @param  Node $target
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if target has no parent)
      */
     public function appendBefore(Node $target) {
         if (isset($target->parent)) {
-            // Set parent
+            // set parent
             $this->setParent($target->parent);
-            // Get index of target
+            // get index of target
             $i = (int) $target->parent->children->index($target);
-            // Put it into parent's children with specific index
+            // put it into parent's children with specific index
             $target->parent->children->put($i, $this);
 
             return $this;
         }
+
         throw new Error\Node('Target node has no parent! node: `%s`', $target->name);
     }
 
     /**
-     * Remove a child
+     * Remove a child.
      *
      * @param  Node $target
+     * @throws Dom\Error\Node
      * @return self
-     * @throws Error\Node (if child not found)
      */
     public function remove(Node $child) {
         if (($i = $this->children->index($child)) !== null) {
             $this->children->del($i);
+
             return $this;
         }
+
         throw new Error\Node(
             'The node to be removed is not a child of this node. node: `%s`', $node->name);
     }
 
     /**
-     * Append a child to target's parent node
+     * Append a child to target's parent node.
      *
-     * This method is slow, if $deep=true then it's very slow
-     * Could not figure out, will be done..
+     * Notice: This method is slow, if $deep=true then it's
+     * very slow. Could not figure out, will be done..
      *
-     * @param  bool $deep
      * @return Node
+     * @param  boolean $deep
      */
     public function doClone($deep = false) {
         $doc = new Document();
@@ -487,11 +491,11 @@ class Node
             case self::TYPE_ELEMENT:
                 $clone = $doc->createElement($this->name);
                 $clone->attributes = new AttributeCollection();
-                // Attributes..
+                // attributes..
                 if ($this->hasAttributes()) {
                     foreach ($this->attributes as $attribute) {
                         if ($attribute->isId()) {
-                            // Thanks! <https://developer.mozilla.org/en-US/docs/Web/API/Node.cloneNode>
+                            // thanks! https://developer.mozilla.org/en-US/docs/Web/API/Node.cloneNode
                             trigger_error('cloneNode() may lead to duplicate element IDs in a document.',
                                 E_USER_WARNING);
                         }
@@ -499,11 +503,11 @@ class Node
                         $clone->attributes->add($attribute);
                     }
                 }
-                // Append child nodes if deep clone
-                // Use carefully cos it is slow a bit..
+                // append child nodes if deep clone
+                // use carefully cos it is slow a bit..
                 if ($deep && $this->hasChildren()) {
                     foreach ($this->children as $child) {
-                        // Fucking slow but still works without this.. :/
+                        // fucking slow but still works without this.. :/
                         // $child = $child->doClone($deep);
                         $clone->append($child);
                     }
@@ -515,14 +519,14 @@ class Node
                 $clone = $doc->create($this->type, $this->getContent());
                 break;
         }
-        // Set owner document
+        // set owner document
         $clone->setOwnerDocument($this->ownerDocument);
 
         return $clone;
     }
 
     /**
-     * Remove all children from node
+     * Remove all children from node.
      *
      * @return self
      */
@@ -535,46 +539,49 @@ class Node
     }
 
     /**
-     * Shotcut for appending text nodes
+     * Shotcut for appending text nodes.
      *
-     * @param  str $contents
+     * @param  string $contents
      * @return self
      */
     public function appendText($contents) {
-        // Create a new Text node
+        // create a new text node
         $contents = new Text($contents);
         $contents->setOwnerDocument($this->ownerDocument);
+
         return $this->append($contents);
     }
 
     /**
-     * Shotcut for appending comment nodes
+     * Shotcut for appending comment nodes.
      *
-     * @param  str $contents
+     * @param  string $contents
      * @return self
      */
     public function appendComment($contents) {
-        // Create a new Comment node
+        // create a new comment node
         $contents = new Comment($contents);
         $contents->setOwnerDocument($this->ownerDocument);
+
         return $this->append($contents);
     }
 
     /**
-     * Shotcut for appending cdata nodes
+     * Shotcut for appending cdata nodes.
      *
-     * @param  str $contents
+     * @param  string $contents
      * @return self
      */
     public function appendCData($contents) {
-        // Create a new CData node
+        // create a new cdata node
         $contents = new CData($contents);
         $contents->setOwnerDocument($this->ownerDocument);
+
         return $this->append($contents);
     }
 
     /**
-     * Check node has children
+     * Check node has children.
      *
      * @return boolean
      */
@@ -584,7 +591,7 @@ class Node
     }
 
     /**
-     * Check node has attributes
+     * Check node has attributes.
      *
      * @return boolean
      */
@@ -592,31 +599,33 @@ class Node
         if ($this->attributes instanceof AttributeCollection &&
                 $this->attributes->length > 0) {
             foreach ($this->attributes as $i => $attribute) {
-                // Control for class/style attributes has item?
+                // control for class/style attributes has item?
                 if ((($this->isClassAttribute($attribute) || $this->isStyleAttribute($attribute))
                     && $attribute->value->length) || $i >= 2) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
     /**
-     * Add attribute object to node
+     * Add attribute object to node.
      *
-     * @param Attribute $attribute
+     * @param  Attribute $attribute
      * @return self
      */
     public function setAttributeObject(Attribute $attribute) {
         $this->attributes->add($attribute);
+
         return $this;
     }
 
     /**
-     * Get attribute object of node
+     * Get attribute object of node.
      *
-     * @param  str $name
+     * @param  string    $name
      * @return Attribute $attribute|null
      */
     public function getAttributeObject($name) {
@@ -628,10 +637,10 @@ class Node
     }
 
     /**
-     * Set node attribute
+     * Set node attribute.
      *
-     * @param  str $name
-     * @param  mix $value
+     * @param  string $name
+     * @param  mixed  $value
      * @return self
      */
     public function setAttribute($name, $value = null) {
@@ -639,16 +648,18 @@ class Node
             foreach ($name as $key => $val) {
                 $this->setAttribute($key, $val);
             }
+
             return $this;
         }
+
         return $this->setAttributeObject(new Attribute($name, $value, $this));
     }
 
     /**
-     * Get node attribute value
+     * Get node attribute value.
      *
-     * @param  str $name
-     * @return str|null
+     * @param  string $name
+     * @return string|null
      */
     public function getAttribute($name) {
         foreach ($this->attributes as $attribute) {
@@ -659,9 +670,9 @@ class Node
     }
 
     /**
-     * Remove node attribute
+     * Remove node attribute.
      *
-     * @param  str $name
+     * @param  string $name
      * @return self
      */
     public function removeAttribute($name) {
@@ -671,14 +682,15 @@ class Node
                 break;
             }
         }
+
         return $this;
     }
 
     /**
-     * Check node attribute is exists
+     * Check node attribute is exists.
      *
-     * @param  str $name
-     * @return bool
+     * @param  string $name
+     * @return boolean
      */
     public function hasAttribute($name) {
         foreach ($this->attributes as $attribute) {
@@ -686,28 +698,32 @@ class Node
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * Get child node by index
+     * Get child node by index.
      *
-     * @param  str $i
+     * @param  integer $i
+     * @throws Dom\Error\Node
      * @return Node
-     * @throws Error\Node (if index not found | seletor node is not document/element)
      */
     public function item($i) {
+        // selector node is not document/element?
         if ($this->type == self::TYPE_DOCUMENT || $this->type == self::TYPE_ELEMENT) {
             if ($this->children->has($i)) {
                 return $this->children->item($i);
             }
+
             throw new Error\Node('Item index not found! item: %s', $i);
         }
+
         throw new Error\Node('Not suppoerted node to select! node: %s', $this->name);
     }
 
     /**
-     * Get first child
+     * Get first child.
      *
      * @return self.item()
      */
@@ -716,7 +732,7 @@ class Node
     }
 
     /**
-     * Get last child
+     * Get last child.
      *
      * @return self.item()
      */
@@ -725,7 +741,7 @@ class Node
     }
 
     /**
-     * Get previous sibling
+     * Get previous sibling.
      *
      * @return Node|null
      */
@@ -740,7 +756,7 @@ class Node
     }
 
     /**
-     * Get next sibling
+     * Get next sibling.
      *
      * @return Node|null
      */
@@ -755,7 +771,7 @@ class Node
     }
 
     /**
-     * Get previous siblings
+     * Get previous siblings.
      *
      * @return NodeCollection|null
      */
@@ -768,12 +784,13 @@ class Node
                 }
                 $collection->add($child);
             }
+
             return $collection;
         }
     }
 
     /**
-     * Get next siblings
+     * Get next siblings.
      *
      * @return NodeCollection|null
      */
@@ -787,12 +804,13 @@ class Node
                 }
                 $found && $child != $this && $collection->add($child);
             }
+
             return $collection;
         }
     }
 
     /**
-     * Get siblings
+     * Get siblings.
      *
      * @return NodeCollection|null
      */
@@ -804,30 +822,32 @@ class Node
                     $collection->add($child);
                 }
             }
+
             return $collection;
         }
     }
+
     // @notimplemented
     public function find($selector) {}
 
     /**
-     * Set inner text (aka textContent)
+     * Set inner text (aka textContent).
      *
-     * This method will not parse and create/append $contents as child nodes
-     * into the target ($this) node for now, but in the future...
+     * Notice: This method will not parse and create/append $contents as
+     * child nodes into the target ($this) node for now, but in the future..
      *
-     * @param strint $contents
+     * @param string $contents
      */
     public function setInnerText($contents) {
-        $this->doEmpty();
-        $this->appendText($contents);
+        $this->doEmpty()->appendText($contents);
+
         return $this;
     }
 
     /**
-     * Get inner text (aka textContent)
+     * Get inner text (aka textContent).
      *
-     * @return str
+     * @return string
      */
     public function getInnerText() {
         return strip_tags($this->toString());
@@ -838,47 +858,47 @@ class Node
     public function getInnerHtml() {}
 
     /**
-     * Path get implementation like DOMNode::getNodePath
+     * Path get implementation like PHP DOMNode::getNodePath().
+     * <http://php.net/manual/en/domnode.getnodepath.php>
      *
-     * @link   http://php.net/manual/en/domnode.getnodepath.php
-     * @return str Node path
+     * @return string
      */
     public function getPath() {
-        // Set first self name
+        // set first self name
         $path = array(-1 => $this->name);
 
-        // Set path as array look, e.g #document/html/body/div/p[0]
+        // set path as array look, e.g #document/html/body/div/p[0]
         static $i = 0;
         if ($siblings = $this->siblings()) {
             foreach ($siblings as $sibling) {
                 if ($sibling->name == $this->name) {
-                    // Overwrite
+                    // overwrite
                     $path[-1] = sprintf('%s[%d]', $this->name, $i++);
                 }
             }
         }
 
-        // Get parent
+        // get parent
         $parent = $this->parent;
-        // Upward recursion
+        // upward recursion
         while ($parent != null) {
             $path[] = $parent->name;
-            // Next
+            // next
             $parent = $parent->parent;
         }
 
-        // Return path
+        // return path
         return join('/', array_reverse($path));
     }
 
     /**
-     * Output generator
+     * Output generator.
      *
-     * @return str (innerText/innerHtml)
+     * @return string
      */
     public function toString() {
         $string = '';
-        // Add doctype xml/html
+        // add doctype xml/html
         if ($this->type == self::TYPE_DOCUMENT) {
             if ($this->doctype->name == Document::DOCTYPE_HTML) {
                 $string .= sprintf("<!DOCTYPE %s>\r\n",
@@ -888,32 +908,33 @@ class Node
                     $this->version, $this->encoding);
             }
         }
-        // Child nodes
+
+        // child nodes
         foreach ($this->children as $node) {
-            // Prepare nodes as string
+            // prepare nodes as string
             switch ($node->type) {
-                // Add #text|comment|cdata nodes
+                // add #text|comment|cdata nodes
                 case self::TYPE_TEXT:
                 case self::TYPE_CDATA:
                 case self::TYPE_COMMENT:
                    $string .= $node->getContent();
                    break;
-                // Add element contents
+                // add element contents
                 case self::TYPE_ELEMENT:
-                    // Prepare attributes as string
+                    // prepare attributes as string
                     $attributes = '';
                     if ($node->hasAttributes()) {
-                        // Overwrite to join
+                        // overwrite to join
                         $attributes = array();
                         foreach ($node->attributes as $attribute) {
-                            // Append classes
+                            // append classes
                             if ($this->isClassAttribute($attribute)) {
                                 if ($classText = $node->getClassText()) {
                                     $attributes[] = sprintf('class="%s"', $classText);
                                 }
                                 continue;
                             }
-                            // Append styles
+                            // append styles
                             if ($this->isStyleAttribute($attribute)) {
                                 if ($styleText = $node->getStyleText()) {
                                     $attributes[] = sprintf('style="%s"', $styleText);
@@ -922,17 +943,17 @@ class Node
                             }
                             $attributes[] = sprintf('%s="%s"', $attribute->name, $attribute->value);
                         }
-                        // Pass empty class/style count
+                        // pass empty class/style count
                         $attributes = count($attributes)
                             ? ' '. join(' ', $attributes)
                             : '';
                     }
-                    // Check is self closing tag or not
+                    // check is self closing tag or not
                     if ($node->selfClosing) {
                         $string .= sprintf('<%s%s />', $node->name, $attributes);
                     } else {
                         $string .= sprintf('<%s%s>', $node->name, $attributes);
-                        // Do recursion if has children
+                        // do recursion if has children
                         if ($node->hasChildren()) {
                             $string .= $node->toString();
                         }
@@ -946,11 +967,11 @@ class Node
     }
 
     /**
-     * Check target node ($this) can istert the given node as child
+     * Check target node ($this) can istert the given node as child.
      *
      * @param  Node $node
-     * @return bool
-     * @throws Error\Node (see messages)
+     * @throws Dom\Error\Node
+     * @return boolean
      */
     protected function canInsert(Node $node) {
         /**
@@ -963,7 +984,7 @@ class Node
          * }
          */
 
-        // WTF the hierarchy rules.. @mustbeextended
+        // wtf the hierarchy rules.. @mustbeextended
         if ($node->type == self::TYPE_ELEMENT && ($this->type == self::TYPE_TEXT ||
             $this->type == self::TYPE_COMMENT || $this->type == self::TYPE_DOCUMENT_TYPE)) {
             throw new Error\Node('No insert operations into #text, #comment and #documentType');
@@ -984,15 +1005,15 @@ class Node
             throw new Error\Node('No insert operations self closing node!');
         }
 
-        // This is trivial but stands for future devs
+        // this is trivial but stands for future dev
         return true;
     }
 
     /**
-     * Check attribute whether class or not
+     * Check attribute whether class or not.
      *
      * @param  Attribute $attribute
-     * @return bool
+     * @return boolean
      */
     protected function isClassAttribute($attribute) {
         return ($attribute->name == self::ATTRIBUTE_NAME_CLASS
@@ -1000,21 +1021,13 @@ class Node
     }
 
     /**
-     * Check attribute whether style or not
+     * Check attribute whether style or not.
      *
      * @param  Attribute $attribute
-     * @return bool
+     * @return boolean
      */
     protected function isStyleAttribute($attribute) {
         return ($attribute->name == self::ATTRIBUTE_NAME_STYLE
                     && $attribute->value instanceof StyleCollection);
     }
 }
-
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/Node.php
- * @tabs Space=4 (Sublime Text 3)
- */

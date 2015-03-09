@@ -34,10 +34,3 @@ namespace Dom\Node;
  */
 class AttributeCollection
     extends \Dom\Collection {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/AttributeCollection.php
- * @tabs Space=4 (Sublime Text 3)
- */

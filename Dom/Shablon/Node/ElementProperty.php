@@ -41,53 +41,53 @@ use \Dom\Node\Element;
 abstract class ElementProperty
 {
     /**
-     * Name of property
-     * @var str
+     * Name of property.
+     * @var string
      */
     protected $name;
 
     /**
-     * Type of property
-     * @var mix
+     * Type of property.
+     * @var mixed
      */
     protected $value;
 
     /**
-     * Owner element of property
-     * @var Element
+     * Owner element of property.
+     * @var Dom\Element
      */
     protected $ownerElement;
 
     /**
-     * Create a new Element object
+     * Create a new ElementProperty object.
      *
-     * @param str $name
-     * @param mix $value
-     * @param Element|null $ownerElement
+     * @param string $name
+     * @param mixed  $value
+     * @param Dom\Element|null $ownerElement
      */
     public function __construct($name, $value, Element $ownerElement = null) {
-        // Set value as string
+        // set value as string
         if ($name != Node::ATTRIBUTE_NAME_CLASS &&
             $name != Node::ATTRIBUTE_NAME_STYLE) {
             $value = (string) $value;
         }
-        // Set properties
+        // set properties
         $this->name  = $name;
         $this->value = $value;
 
-        // Set owner element
+        // set owner element
         if ($ownerElement) {
             $this->setOwnerElement($ownerElement);
         }
     }
 
     /**
-     * Always throws exception
+     * Always throws exception.
      *
-     * @param  str  $name
-     * @param  mix  $value
+     * @param  string $name
+     * @param  mixed  $value
+     * @throw  Dom\Error\Property
      * @return void
-     * @throw  Error\Property (if any property directly set)
      */
     public function __set($name, $value) {
         throw new Error\Property(
@@ -95,23 +95,24 @@ abstract class ElementProperty
     }
 
     /**
-     * Returns property if exists
+     * Returns property if exists.
      *
-     * @param  str $name
-     * @return mix
-     * @throw  Error\Property (if property does not exists)
+     * @param  string $name
+     * @throw  Dom\Error\Property
+     * @return mixed
      */
     public function __get($name) {
         if (in_array($name, array('name', 'value'))) {
             return $this->$name;
         }
+
         throw new Error\Property('Property does not exists! name: %s', $name);
     }
 
     /**
-     * Set owner Element
+     * Set owner element.
      *
-     * @param  Element|null $ownerElement
+     * @param  Dom\Element|null $ownerElement
      * @return void
      */
     public function setOwnerElement(Element $ownerElement = null) {
@@ -119,43 +120,36 @@ abstract class ElementProperty
     }
 
     /**
-     * Get owner Element
+     * Get owner element.
      *
-     * @return Element
+     * @return Dom\Element
      */
     public function getOwnerElement() {
         return $this->ownerElement;
     }
 
     /**
-     * Get property name
+     * Get property name.
      *
-     * @return str
+     * @return string
      */
     public function getName() {
         return $this->name;
     }
 
     /**
-     * Get property value
+     * Get property value.
      *
-     * @return mix
+     * @return mixed
      */
     public function getValue() {
         return $this->value;
     }
 
     /**
-     * Return property name/value
+     * Return property name/value.
      *
      * @return string
      */
     abstract public function toString();
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Shablon/ElementProperty.php
- * @tabs Space=4 (Sublime Text 3)
- */

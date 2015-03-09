@@ -34,10 +34,3 @@ namespace Dom\Error;
  */
 class Argument
     extends \Dom\Error {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Error/Argument.php
- * @tabs Space=4 (Sublime Text 3)
- */

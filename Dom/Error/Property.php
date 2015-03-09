@@ -34,10 +34,3 @@ namespace Dom\Error;
  */
 class Property
     extends \Dom\Error {}
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Error/Property.php
- * @tabs Space=4 (Sublime Text 3)
- */

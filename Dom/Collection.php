@@ -28,36 +28,36 @@ namespace Dom;
 use \Dom\Error;
 
 /**
- * @package Dom
- * @object  Dom\Collection
- * @uses    Dom\Error
+ * @package    Dom
+ * @object     Dom\Collection
+ * @uses       Dom\Error
  * @implements \Countable, \IteratorAggregate, \ArrayAccess
- * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @version    1.0
+ * @author     Kerem Gunes <qeremy@gmail>
  */
 class Collection
     implements \Countable, \IteratorAggregate, \ArrayAccess
 {
     /**
-     * Count of items
-     * @var int
+     * Count of items.
+     * @var integer
      */
     protected $length = 0;
 
     /**
-     * Items stack
+     * Items stack.
      * @var array
      */
-    protected $items  = array();
+    protected $items = array();
 
 
     /**
-     * Create a new Collection object
+     * Create a new Collection object.
      *
-     * @param  array $items
+     * @param array $items
      */
     public function __construct(array $items = null) {
-        // Set items
+        // set items
         if (!empty($items)) {
             foreach ($items as $item) {
                 $this->add($item);
@@ -66,12 +66,12 @@ class Collection
     }
 
     /**
-     * Always throw an exception
+     * Always throw an exception.
      *
-     * @param  str  $name
-     * @param  mix  $value
+     * @param  string  $name
+     * @param  mixed   $value
+     * @throw  Dom\Error\Property
      * @return void
-     * @throw  Error\Property (if any property directly set)
      */
     public function __set($name, $value) {
         throw new Error\Property(
@@ -79,11 +79,11 @@ class Collection
     }
 
     /**
-     * Return property if exists
+     * Return property if exists.
      *
-     * @param  str $name
-     * @return mix
-     * @throw  Error\Property (if property does not exists)
+     * @param  string $name
+     * @throw  Dom\Error\Property
+     * @return mixed
      */
     public function __get($name) {
         if (property_exists($this, $name)) {
@@ -93,29 +93,20 @@ class Collection
     }
 
     /**
-     * Update collection length after each modify action
+     * Add new item.
      *
-     * @return void
-     */
-    private function updateLength() {
-        $this->length = $this->count();
-    }
-
-    /**
-     * Add new item
-     *
-     * @param  mix  $item
+     * @param  mixed  $item
+     * @throw  Dom\Error
      * @return self
-     * @throw  Error (if index does not exists)
      */
     public function add($item) {
         return $this->offsetSet($this->length, $item);
     }
 
     /**
-     * Remove an item with specific index
+     * Remove an item with specific index.
      *
-     * @param  int  $i
+     * @param  integer $i
      * @return self
      */
     public function del($i) {
@@ -123,7 +114,7 @@ class Collection
     }
 
     /**
-     * Remove all items
+     * Remove all items.
      *
      * @return self
      */
@@ -131,31 +122,32 @@ class Collection
         foreach ($this->items as $i => $item) {
             $this->del($i);
         }
+
         return $this;
     }
 
     /**
-     * Check items exists or not
+     * Check items exists or not.
      *
-     * @param  int  $i
-     * @return bool
+     * @param  integer $i
+     * @return boolean
      */
     public function has($i) {
         return $this->offsetExists($i);
     }
 
     /**
-     * Return item if exists
+     * Return item if exists.
      *
-     * @param  int  $i
-     * @return mix
+     * @param  integer $i
+     * @return mixed
      */
     public function item($i) {
         return $this->offsetGet($i);
     }
 
     /**
-     * Return items
+     * Return items.
      *
      * @return array
      */
@@ -164,77 +156,83 @@ class Collection
     }
 
     /**
-     * Pop an item
+     * Pop an item.
      *
-     * @return mix
+     * @return mixed
      */
     public function pop() {
         $return = array_pop($this->items);
         $this->updateLength();
+
         return $return;
     }
 
     /**
-     * Shift an item
+     * Shift an item.
      *
-     * @return mix
+     * @return mixed
      */
     public function shift() {
         $return = array_shift($this->items);
         $this->updateLength();
+
         return $return;
     }
 
     /**
-     * Put an item to items with specific index
+     * Put an item to items with specific index.
      *
-     * @param  int  $i
-     * @param  mix  $item
+     * @param  integer $i
+     * @param  mixed   $item
      * @return self
      */
     public function put($i, $item) {
         array_splice($this->items, abs($i), 0, array($item));
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Add an item to the beginning
+     * Add an item to the beginning.
      *
-     * @param  mix  $item
+     * @param  mixed $item
      * @return self
      */
     public function append($item) {
         $this->items = array_merge($this->items, array($item));
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Add an item onto the end
+     * Add an item onto the end.
      *
-     * @param  mix $item
+     * @param  mixed $item
      * @return self
      */
     public function prepend($item) {
         array_unshift($this->items, $item);
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Remove duplicates from items
+     * Remove duplicates from items.
      *
      * @return self
      */
     public function unique() {
         $this->items = array_unique($this->items);
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Filter items using callback
+     * Filter items using callback.
      *
      * @param  \Closure $callback
      * @return self
@@ -243,17 +241,19 @@ class Collection
         $this->items = array_filter($this->items, function($item) use($callback) {
             return $callback($item);
         });
+
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Replace an item with specific index
+     * Replace an item with specific index.
      *
-     * @param  int  $i
-     * @param  mix  $newItem
+     * @param  integer $i
+     * @param  mixed   $newItem
+     * @throw  Dom\Error
      * @return self
-     * @throw  Error (if index not found)
      */
     public function replace($i, $newItem) {
         foreach ($this->items as $ii => $item) {
@@ -266,9 +266,9 @@ class Collection
     }
 
     /**
-     * Return the matched index if item found in items
+     * Return the matched index if item found in items.
      *
-     * @param  mix  $srcItem
+     * @param  mixed $srcItem
      * @return int|null
      */
     public function index($srcItem) {
@@ -278,19 +278,21 @@ class Collection
                 return $i;
             }
         }
+
+        return null;
     }
 
     /**
-     * Abstract method of \Countable::count
+     * Abstract method of \Countable.
      *
-     * @return int
+     * @return integer
      */
     public function count() {
         return count($this->items);
     }
 
     /**
-     * Abstract method of \IteratorAggregate::getIterator
+     * Abstract method of \IteratorAggregate.
      *
      * @return \ArrayIterator
      */
@@ -299,66 +301,68 @@ class Collection
     }
 
     /**
-     * Abstract method of ArrayAccess::offsetSet
+     * Abstract method of ArrayAccess.
      *
-     * @param  int  $i
-     * @param  mix  $item
+     * @param  integer $i
+     * @param  mixed   $item
+     * @throw  Dom\Error
      * @return self
-     * @throw  Error (if index already exists)
      */
     public function offsetSet($i, $item) {
-        if (!$this->offsetExists($i)) {
-            // Set item
-            $this->items[$i] = $item;
-            // Update length
-            $this->updateLength();
-            return $this;
-        }
-        throw new Error('Item index already exists! index: %d', $i);
-    }
-
-    /**
-     * Abstract method of ArrayAccess::offsetGet
-     *
-     * @param  int  $i
-     * @return mix
-     * @throw  Error (if index does no exists)
-     */
-    public function offsetGet($i) {
         if ($this->offsetExists($i)) {
-            return $this->items[$i];
+            throw new Error('Item index already exists! index: %d', $i);
         }
-        throw new Error('Item index does not exists! index: %d', $i);
-    }
 
-    /**
-     * Abstract method of ArrayAccess::offsetUnset
-     *
-     * @param  int  $i
-     * @return self
-     */
-    public function offsetUnset($i) {
-        // Remove item
-        unset($this->items[$i]);
-        // Update length
+        $this->items[$i] = $item;
         $this->updateLength();
+
         return $this;
     }
 
     /**
-     * Abstract method of ArrayAccess::offsetExists
+     * Abstract method of ArrayAccess.
      *
-     * @param  int  $i
-     * @return bool
+     * @param  integer $i
+     * @throw  Dom\Error
+     * @return mixed
+     */
+    public function offsetGet($i) {
+        if (!$this->offsetExists($i)) {
+            throw new Error('Item index does not exists! index: %d', $i);
+        }
+
+        return $this->items[$i];
+    }
+
+    /**
+     * Abstract method of ArrayAccess.
+     *
+     * @param  integer $i
+     * @return self
+     */
+    public function offsetUnset($i) {
+        unset($this->items[$i]);
+        $this->updateLength();
+
+        return $this;
+    }
+
+    /**
+     * Abstract method of ArrayAccess.
+     *
+     * @param  integer $i
+     * @return boolean
      */
     public function offsetExists($i) {
         return isset($this->items[$i]);
     }
-}
 
-/**
- * End of file.
- *
- * @file /dom/Dom/Collection.php
- * @tabs Space=4 (Sublime Text 3)
- */
+    /**
+     * Update collection length after each modify action.
+     *
+     * @return void
+     */
+    private function updateLength() {
+        $this->length = $this->count();
+    }
+}

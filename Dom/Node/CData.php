@@ -25,14 +25,11 @@
 
 namespace Dom\Node;
 
-use \Dom\Error;
-
 /**
  * @package    Dom\Node
  * @object     Dom\Node\CData
  * @extends    Dom\Node\Node
  * @implements Dom\Shablon\Node\TrivialNodeInterface
- * @uses       Dom\Error
  * @version    1.1
  * @author     Kerem Gunes <qeremy@gmail>
  */
@@ -41,47 +38,39 @@ class CData
         implements \Dom\Shablon\Node\TrivialNodeInterface
 {
     /**
-     * Content of node
-     *
-     * @var str
+     * Content of node.
+     * @var string
      */
     protected $content = '';
 
     /**
-     * Create a new CData object
+     * Create a new CData object.
      *
-     * @param str $content
+     * @param string $content
      */
     public function __construct($content) {
-        // Set content
+        // set content
         $this->setContent($content);
 
-        // Call parent init
+        // call parent init
         parent::__construct('#cdata', $content, Node::TYPE_CDATA);
     }
 
     /**
-     * Set node content
+     * Set node content.
      *
-     * @param str $content
+     * @param string $content
      */
     public function setContent($content) {
         $this->content = sprintf('<![CDATA[%s]]>', $content);
     }
 
     /**
-     * Get node content
+     * Get node content.
      *
-     * @return str
+     * @return string
      */
     public function getContent() {
         return $this->content;
     }
 }
-
-/**
- * End of file.
- *
- * @file /dom/Dom/Node/CData.php
- * @tabs Space=4 (Sublime Text 3)
- */
