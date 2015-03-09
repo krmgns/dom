@@ -309,18 +309,18 @@ string                           $element.getStyleText(void)
 StyleCollection $styleCollection $element.getStyleCollection(void)
 ```
 
-** `\Dom\Patterns\InterfaceTrivialNode`
+** `\Dom\Shablon\Node\InterfaceTrivialNode`
 
 ```php
 void                             $sub.setContent(string $content)
 string                           $sub.getContent(void)
 ```
 
-** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`<br>
-** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`<br>
-** `\Dom\Node\Comment` extends `\Dom\Node\Node` implements `\Dom\Patterns\InterfaceTrivialNode`
+** `\Dom\Node\Text` extends `\Dom\Node\Node` implements `\Dom\Shablon\Node\InterfaceTrivialNode`<br>
+** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Shablon\Node\InterfaceTrivialNode`<br>
+** `\Dom\Node\Comment` extends `\Dom\Node\Node` implements `\Dom\Shablon\Node\InterfaceTrivialNode`
 
-** `\Dom\Patterns\AbstractElementProperty`
+** `\Dom\Shablon\Node\ElementProperty`
 
 ```php
 throw                            __set(string $name, string $value)
@@ -332,9 +332,9 @@ string                           $sub.getValue(void)
 abstract string                  toString(void)
 ```
 
-** `\Dom\Node\Style` extends `\Dom\Patterns\AbstractElementProperty`
+** `\Dom\Node\Style` extends `\Dom\Shablon\Node\ElementProperty`
 
-** `\Dom\Node\Attribute` extends `\Dom\Patterns\AbstractElementProperty`
+** `\Dom\Node\Attribute` extends `\Dom\Shablon\Node\ElementProperty`
 
 ```php
 bool                             $sub.isId(void)

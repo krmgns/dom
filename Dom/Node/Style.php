@@ -28,12 +28,12 @@ namespace Dom\Node;
 /**
  * @package Dom\Node
  * @object  Dom\Node\Style
- * @extends Dom\Patterns\AbstractElementProperty
- * @version 1.0
+ * @extends Dom\Shablon\Node\ElementProperty
+ * @version 1.1
  * @author  Kerem Gunes <qeremy@gmail>
  */
 class Style
-    extends \Dom\Patterns\AbstractElementProperty
+    extends \Dom\Shablon\Node\ElementProperty
 {
     /**
      * Return formatted string contents of name/value

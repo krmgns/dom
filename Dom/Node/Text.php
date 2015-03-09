@@ -28,17 +28,17 @@ namespace Dom\Node;
 use \Dom\Error;
 
 /**
- * @package Dom\Node
- * @object  Dom\Node\Text
- * @extends Dom\Node\Node
- * @implements Dom\Patterns\InterfaceTrivialNode
- * @uses    Dom\Error
- * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @package    Dom\Node
+ * @object     Dom\Node\Text
+ * @extends    Dom\Node\Node
+ * @implements Dom\Shablon\Node\TrivialNodeInterface
+ * @uses       Dom\Error
+ * @version    1.1
+ * @author     Kerem Gunes <qeremy@gmail>
  */
 class Text
     extends Node
-        implements \Dom\Patterns\InterfaceTrivialNode
+        implements \Dom\Shablon\Node\TrivialNodeInterface
 {
     /**
      * Content of node

@@ -23,65 +23,36 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Node;
-
-use \Dom\Error;
+namespace Dom\Shablon\Node;
 
 /**
- * @package    Dom\Node
- * @object     Dom\Node\Comment
- * @extends    Dom\Node\Node
- * @implements Dom\Shablon\Node\TrivialNodeInterface
- * @uses       Dom\Error
- * @version    1.1
- * @author     Kerem Gunes <qeremy@gmail>
+ * @package Dom\Shablon\Node
+ * @object  Dom\Shablon\Node\TrivialNodeInterface
+ * @version 1.1
+ * @author  Kerem Gunes <qeremy@gmail>
+ *
+ * @interface
  */
-class Comment
-    extends Node
-        implements \Dom\Shablon\Node\TrivialNodeInterface
+interface TrivialNodeInterface
 {
-    /**
-     * Content of node
-     *
-     * @var str
-     */
-    protected $content = '';
-
-    /**
-     * Create a new Comment object
-     *
-     * @param str $content
-     */
-    public function __construct($content) {
-        // Set content
-        $this->setContent($content);
-
-        // Call parent init
-        parent::__construct('#comment', $content, Node::TYPE_COMMENT);
-    }
-
     /**
      * Set node content
      *
-     * @param str $content
+     * @param  str $content
      */
-    public function setContent($content) {
-        $this->content = sprintf('<!--%s-->', $content);
-    }
+    public function setContent($content);
 
     /**
      * Get node content
      *
      * @return str
      */
-    public function getContent() {
-        return $this->content;
-    }
+    public function getContent();
 }
 
 /**
  * End of file.
  *
- * @file /dom/Dom/Node/Comment.php
+ * @file /dom/Dom/Shablon/TrivialNodeInterface.php
  * @tabs Space=4 (Sublime Text 3)
  */
