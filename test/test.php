@@ -16,7 +16,7 @@ function prd($input, $exit = false){
 }
 
 spl_autoload_register(function($name) {
-    require(sprintf('%s/%s.php', __dir__, ltrim(str_replace('\\', '/', $name), '/')));
+    require(sprintf('%s/../%s.php', __dir__, ltrim(str_replace('\\', '/', $name), '/')));
 });
 
 /*****************************/
