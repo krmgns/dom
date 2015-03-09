@@ -1,0 +1,6 @@
+- Add html parser
+- Implement load() and save()
+- Implement getElement*()
+- Implement find()
+- More easy access to $element->style['color'] or $element->style->color (__set/__get in Element)
+- Add xmlns support
