@@ -70,7 +70,7 @@ class Collection
      *
      * @param  string  $name
      * @param  mixed   $value
-     * @throw  Dom\Error\Property
+     * @throws Dom\Error\Property
      * @return void
      */
     public function __set($name, $value) {
@@ -82,7 +82,7 @@ class Collection
      * Return property if exists.
      *
      * @param  string $name
-     * @throw  Dom\Error\Property
+     * @throws Dom\Error\Property
      * @return mixed
      */
     public function __get($name) {
@@ -96,7 +96,7 @@ class Collection
      * Add new item.
      *
      * @param  mixed  $item
-     * @throw  Dom\Error
+     * @throws Dom\Error
      * @return self
      */
     public function add($item) {
@@ -252,7 +252,7 @@ class Collection
      *
      * @param  integer $i
      * @param  mixed   $newItem
-     * @throw  Dom\Error
+     * @throws Dom\Error
      * @return self
      */
     public function replace($i, $newItem) {
@@ -305,7 +305,7 @@ class Collection
      *
      * @param  integer $i
      * @param  mixed   $item
-     * @throw  Dom\Error
+     * @throws Dom\Error
      * @return self
      */
     public function offsetSet($i, $item) {
@@ -323,7 +323,7 @@ class Collection
      * Abstract method of ArrayAccess.
      *
      * @param  integer $i
-     * @throw  Dom\Error
+     * @throws Dom\Error
      * @return mixed
      */
     public function offsetGet($i) {
