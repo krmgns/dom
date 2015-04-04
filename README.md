@@ -6,7 +6,7 @@ Now, let's see what we can do with that sweet thing... :)
 
 **Notices**
 
-- It is not 100% implementation of [WC3 DOM specs](//www.w3.org/DOM) (contains inclusions/exclusions), but very similar to [mii.js](//github.com/qeremy/mii)
+- It is not 100% implementation of [WC3 DOM specs](//www.w3.org/DOM) (contains inclusions/exclusions), but very similar to [so.js](//github.com/qeremy/so)
 - It does not use [PHP DOM](//php.net/book.dom) Library
 - "For now", it designed only to create and modify XML/HTML documents (will be extended for Parse/Query supports)
 - Set your autoloader first to get it work well
