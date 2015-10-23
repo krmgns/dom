@@ -122,7 +122,7 @@ $app->get('/user/:id/messages', function($request, $response) use($app) {
         $m->appendTo($ms);
     }
 
-    // Get output
+    // Get output as string
     $xml = $doc->toString();
 
     // Send response as XML
