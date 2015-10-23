@@ -105,26 +105,27 @@ $app->get('/user/:id/messages', function($request, $response) use($app) {
     $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
 
     // Create root node and append it into Document
-    $messagesNode = $doc->createElement('messages');
-    $messagesNode->appendTo($doc);
+    $ms = $doc->createElement('messages');
+    $ms->appendTo($doc);
 
-    foreach ($app->getUserMessages($request->id) as $message) {
+    $messages = $app->model('User', ['id' => $request->id])->getMessages();
+    foreach ($messages as $message) {
         // Create child node
-        $messageNode = $doc->createElement('message', [
+        $m = $doc->createElement('message', [
             // Add attributes
             'date' => $message->date,
             'read' => $message->read
         ]);
         // Set inner text (or appendCData if needed)
-        $messageNode->appendText($message->text);
+        $m->appendText($message->text);
         // Append child node into root node
-        $messageNode->appendTo($messagesNode);
+        $m->appendTo($ms);
     }
 
     // Get output
     $xml = $doc->toString();
     // Send response as XML
-    $response->send($xml);
+    $response->send(200, $xml, 'text/xml');
 });
 ```
 
