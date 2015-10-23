@@ -1015,7 +1015,7 @@ class Node
      * @param  Attribute $attribute
      * @return boolean
      */
-    protected function isClassAttribute($attribute) {
+    protected function isClassAttribute(Attribute $attribute) {
         return ($attribute->name == self::ATTRIBUTE_NAME_CLASS
                     && $attribute->value instanceof ClassCollection);
     }
@@ -1026,7 +1026,7 @@ class Node
      * @param  Attribute $attribute
      * @return boolean
      */
-    protected function isStyleAttribute($attribute) {
+    protected function isStyleAttribute(Attribute $attribute) {
         return ($attribute->name == self::ATTRIBUTE_NAME_STYLE
                     && $attribute->value instanceof StyleCollection);
     }
