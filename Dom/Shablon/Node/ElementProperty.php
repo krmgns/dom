@@ -90,8 +90,7 @@ abstract class ElementProperty
      * @return void
      */
     public function __set($name, $value) {
-        throw new Error\Property(
-            'You cannot set properties dynamically on this class! class: %s', get_class($this));
+        throw new Error\Property('You cannot set properties dynamically on this object!');
     }
 
     /**
