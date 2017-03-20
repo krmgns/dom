@@ -117,7 +117,7 @@ $app->get('/user/:id/messages', function($request, $response) use($app) {
     $xml = $doc->toString();
 
     // send response as xml
-    $response->send(200, $xml, 'text/xml');
+    $response->send(200, 'text/xml', $xml);
 });
 ```
 
