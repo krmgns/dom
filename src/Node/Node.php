@@ -898,11 +898,9 @@ class Node
         // add doctype xml/html
         if ($this->type == self::TYPE_DOCUMENT) {
             if ($this->doctype->name == Document::DOCTYPE_HTML) {
-                $string .= sprintf("<!DOCTYPE %s>\r\n",
-                    $this->doctype->name);
+                $string .= sprintf("<!DOCTYPE %s>\r\n", $this->doctype->name);
             } elseif ($this->doctype->name == Document::DOCTYPE_XML) {
-                $string .= sprintf("<?xml version=\"%s\" encoding=\"%s\"?>%s\r\n",
-                    $this->version, $this->encoding);
+                $string .= sprintf("<?xml version=\"%s\" encoding=\"%s\"?>\r\n", $this->version, $this->encoding);
             }
         }
 
