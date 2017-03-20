@@ -313,7 +313,7 @@ string                           $sub.getContent(void)
 ** `\Dom\Node\CData` extends `\Dom\Node\Node` implements `\Dom\Shablon\Node\InterfaceTrivialNode`<br>
 ** `\Dom\Node\Comment` extends `\Dom\Node\Node` implements `\Dom\Shablon\Node\InterfaceTrivialNode`
 
-** `\Dom\Shablon\Node\ElementProperty`
+** `\Dom\Shablon\PropertyTrait`
 
 ```php
 throw                            __set(string $name, string $value)
@@ -325,9 +325,9 @@ string                           $sub.getValue(void)
 abstract string                  toString(void)
 ```
 
-** `\Dom\Node\Style` extends `\Dom\Shablon\Node\ElementProperty`
+** `\Dom\Node\Style` uses `\Dom\Shablon\PropertyTrait`
 
-** `\Dom\Node\Attribute` extends `\Dom\Shablon\Node\ElementProperty`
+** `\Dom\Node\Attribute` uses `\Dom\Shablon\PropertyTrait`
 
 ```php
 bool                             $sub.isId(void)

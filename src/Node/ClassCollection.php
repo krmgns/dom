@@ -25,12 +25,32 @@
 
 namespace Dom\Node;
 
+use \Dom\Error;
+
 /**
  * @package Dom\Node
- * @object  Dom\Node\NodeCollection
+ * @object  Dom\Node\ClassCollection
  * @extends Dom\Collection
+ * @uses    Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class NodeCollection
-    extends \Dom\Collection {}
+class ClassCollection
+    extends \Dom\Collection
+{
+    /**
+     * Check for item type.
+     *
+     * @param  string $item
+     * @throws Dom\Error\Instance
+     * @return parent
+     */
+    public function append($item) {
+        // Overwrite for "DI" option
+        if (gettype($item) != 'string') {
+            throw new Error\Instance('Item type must be string!');
+        }
+
+        return parent::append($item);
+    }
+}

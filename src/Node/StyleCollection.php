@@ -25,12 +25,32 @@
 
 namespace Dom\Node;
 
+use \Dom\Error;
+
 /**
  * @package Dom\Node
- * @object  Dom\Node\AttributeCollection
+ * @object  Dom\Node\StyleCollection
  * @extends Dom\Collection
+ * @uses    Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class AttributeCollection
-    extends \Dom\Collection {}
+class StyleCollection
+    extends \Dom\Collection
+{
+    /**
+     * Check for item type.
+     *
+     * @param  string $item
+     * @throws Dom\Error\Instance
+     * @return self.parent
+     */
+    public function add($item) {
+        // Overwrite for "DI" option
+        if (!$item instanceof Style) {
+            throw new Error\Instance('Item must be instance of Dom\\Node\\Style!');
+        }
+
+        return parent::add($item);
+    }
+}

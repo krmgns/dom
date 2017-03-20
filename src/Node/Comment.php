@@ -25,32 +25,47 @@
 
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Shablon\TrivialNodeInterface;
 
 /**
  * @package Dom\Node
- * @object  Dom\Node\ClassCollection
- * @extends Dom\Collection
- * @uses    Dom\Error
- * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @object  Dom\Node\Comment
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class ClassCollection
-    extends \Dom\Collection
+class Comment extends Node implements TrivialNodeInterface
 {
     /**
-     * Check for item type.
-     *
-     * @param  string $item
-     * @throws Dom\Error\Instance
-     * @return parent
+     * Content of node.
+     * @var string
      */
-    public function append($item) {
-        // Overwrite for "DI" option
-        if (gettype($item) != 'string') {
-            throw new Error\Instance('Item type must be string!');
-        }
+    protected $content = '';
 
-        return parent::append($item);
+    /**
+     * Create a new Comment object.
+     *
+     * @param string $content
+     */
+    public function __construct($content) {
+        $this->setContent($content);
+
+        parent::__construct('#comment', $content, Node::TYPE_COMMENT);
+    }
+
+    /**
+     * Set node content.
+     *
+     * @param string $content
+     */
+    public function setContent($content) {
+        $this->content = sprintf('<!--%s-->', $content);
+    }
+
+    /**
+     * Get node content.
+     *
+     * @return string
+     */
+    public function getContent() {
+        return $this->content;
     }
 }

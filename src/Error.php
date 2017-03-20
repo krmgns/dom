@@ -23,24 +23,29 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Node;
+namespace Dom;
 
 /**
- * @package Dom\Node
- * @object  Dom\Node\Style
- * @extends Dom\Shablon\Node\ElementProperty
- * @version 1.1
- * @author  Kerem Gunes <qeremy@gmail>
+ * @package Dom
+ * @object  Dom\Error
+ * @extends \Exception
+ * @version 1.0
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Style
-    extends \Dom\Shablon\Node\ElementProperty
+class Error
+    extends \Exception
 {
     /**
-     * Return formatted string contents of name/value.
-     *
-     * @return string
+     * Create a new Error object.
      */
-    public function toString() {
-        return sprintf('%s:%s;',  $this->name, $this->value);
+    public function __construct() {
+        // set message
+        $args = func_get_args();
+        $mesg = count($args) == 1
+            ? "\n ". $args[0] ."\n"
+            : "\n ". vsprintf(array_shift($args), $args) ."\n";
+
+        // call parent init
+        parent::__construct($mesg);
     }
 }

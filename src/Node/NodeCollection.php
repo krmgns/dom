@@ -23,14 +23,14 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Error;
+namespace Dom\Node;
 
 /**
- * @package Dom\Error
- * @object  Dom\Error\Node
- * @extends Dom\Error
+ * @package Dom\Node
+ * @object  Dom\Node\NodeCollection
+ * @extends Dom\Collection
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Node
-    extends \Dom\Error {}
+class NodeCollection
+    extends \Dom\Collection {}

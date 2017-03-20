@@ -25,55 +25,27 @@
 
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Shablon\PropertyTrait;
 
 /**
- * @package    Dom\Node
- * @object     Dom\Node\Text
- * @extends    Dom\Node\Node
- * @implements Dom\Shablon\Node\TrivialNodeInterface
- * @uses       Dom\Error
- * @version    1.1
- * @author     Kerem Gunes <qeremy@gmail>
+ * @package Dom\Node
+ * @object  Dom\Node\Style
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Text
-    extends Node
-        implements \Dom\Shablon\Node\TrivialNodeInterface
+class Style
 {
     /**
-     * Content of node.
-     * @var string
+     * Property trait.
+     * @object Dom\Shablon\PropertyTrait
      */
-    protected $content = '';
+    use PropertyTrait;
 
     /**
-     * Create a new Text object.
-     *
-     * @param string $content
-     */
-    public function __construct($content) {
-        // set content
-        $this->setContent($content);
-
-        // call parent init
-        parent::__construct('#text', $content, Node::TYPE_TEXT);
-    }
-
-    /**
-     * Set node content.
-     *
-     * @param string $content
-     */
-    public function setContent($content) {
-        $this->content = $content;
-    }
-
-    /**
-     * Get node content.
+     * Return formatted string contents of name/value.
      *
      * @return string
      */
-    public function getContent() {
-        return $this->content;
+    public function toString() {
+        return sprintf('%s:%s;',  $this->name, $this->value);
     }
 }

@@ -23,22 +23,18 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Shablon\Node;
+namespace Dom\Shablon;
 
 use \Dom\Error;
 use \Dom\Node\Node;
 use \Dom\Node\Element;
 
 /**
- * @package Dom\Shablon\Node
- * @object  Dom\Shablon\Node\ElementProperty
- * @uses    Dom\Error, Dom\Node, Dom\Node\Element
- * @version 1.1
- * @author  Kerem Gunes <qeremy@gmail>
- *
- * @abstract
+ * @package Dom\Shablon
+ * @object  Dom\Shablon\PropertyTrait
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-abstract class ElementProperty
+trait PropertyTrait
 {
     /**
      * Name of property.
@@ -59,7 +55,7 @@ abstract class ElementProperty
     protected $ownerElement;
 
     /**
-     * Create a new ElementProperty object.
+     * Create a new PropertyTrait object.
      *
      * @param string $name
      * @param mixed  $value

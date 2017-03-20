@@ -23,54 +23,26 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Node;
+namespace Dom\Shablon;
 
 /**
- * @package    Dom\Node
- * @object     Dom\Node\CData
- * @extends    Dom\Node\Node
- * @implements Dom\Shablon\Node\TrivialNodeInterface
- * @version    1.1
- * @author     Kerem Gunes <qeremy@gmail>
+ * @package Dom\Shablon
+ * @object  Dom\Shablon\TrivialNodeInterface
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class CData
-    extends Node
-        implements \Dom\Shablon\Node\TrivialNodeInterface
+interface TrivialNodeInterface
 {
-    /**
-     * Content of node.
-     * @var string
-     */
-    protected $content = '';
-
-    /**
-     * Create a new CData object.
-     *
-     * @param string $content
-     */
-    public function __construct($content) {
-        // set content
-        $this->setContent($content);
-
-        // call parent init
-        parent::__construct('#cdata', $content, Node::TYPE_CDATA);
-    }
-
     /**
      * Set node content.
      *
      * @param string $content
      */
-    public function setContent($content) {
-        $this->content = sprintf('<![CDATA[%s]]>', $content);
-    }
+    public function setContent($content);
 
     /**
      * Get node content.
      *
      * @return string
      */
-    public function getContent() {
-        return $this->content;
-    }
+    public function getContent();
 }

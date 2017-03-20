@@ -28,52 +28,37 @@ namespace Dom\Node;
 use \Dom\Error;
 
 /**
- * @package    Dom\Node
- * @object     Dom\Node\Comment
- * @extends    Dom\Node\Node
- * @implements Dom\Shablon\Node\TrivialNodeInterface
- * @uses       Dom\Error
- * @version    1.1
- * @author     Kerem Gunes <qeremy@gmail>
+ * @package Dom\Node
+ * @object  Dom\Node\DocumentType
+ * @extends Dom\Node
+ * @uses    Dom\Error
+ * @version 1.0
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Comment
+class DocumentType
     extends Node
-        implements \Dom\Shablon\Node\TrivialNodeInterface
 {
     /**
-     * Content of node.
-     * @var string
+     * Prepend doctype xml/html as string?
+     * @var bool
      */
-    protected $content = '';
+    protected $addDoctypeString = true;
 
     /**
-     * Create a new Comment object.
-     *
-     * @param string $content
+     * Create a new DocumentType object.
+     * @param string $name
      */
-    public function __construct($content) {
-        // set content
-        $this->setContent($content);
-
-        // call parent init
-        parent::__construct('#comment', $content, Node::TYPE_COMMENT);
+    public function __construct($name) {
+        parent::__construct($name, null, Node::TYPE_DOCUMENT_TYPE);
     }
 
     /**
-     * Set node content.
+     * Set will return doctype as string or not (for xml/html autputs).
      *
-     * @param string $content
+     * @param  boolean $option
+     * @return void
      */
-    public function setContent($content) {
-        $this->content = sprintf('<!--%s-->', $content);
-    }
-
-    /**
-     * Get node content.
-     *
-     * @return string
-     */
-    public function getContent() {
-        return $this->content;
+    public function addDoctypeString($option) {
+        $this->addDoctypeString = (bool) $option;
     }
 }

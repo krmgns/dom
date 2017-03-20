@@ -20,6 +20,33 @@ spl_autoload_register(function($name) {
 });
 
 /*****************************/
+use Dom\Dom;
+
+// create first document node (default #document)
+$dom = new Dom();
+$doc = $dom->document();
+
+// create <body> node and append into document node
+$body = $doc->createElement('body');
+$body->appendTo($doc);
+
+// create <div> node with "attributes" and "textcontent"
+$div = $doc->createElement('div', [
+    'id'    => 'wrap',
+    'class' => 'wrap-main',
+    'style' => ['color' => '#ff0']
+], 'The DIV text...');
+
+// append <div> into <body>
+$div->appendTo($body);
+// or $body->append($div);
+
+// finally get document contents as html output
+$html = $doc->toString();
+pre($html);
+
+
+return;
 
 $dom = new Dom\Dom();
 $doc = $dom->document();

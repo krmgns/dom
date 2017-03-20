@@ -23,34 +23,14 @@
  * THE SOFTWARE.
  */
 
-namespace Dom\Node;
+namespace Dom\Error;
 
 /**
- * @package Dom\Node
- * @object  Dom\Node\Attribute
- * @extends Dom\Shablon\Node\ElementProperty
- * @version 1.1
- * @author  Kerem Gunes <qeremy@gmail>
+ * @package Dom\Error
+ * @object  Dom\Error\Instance
+ * @extends Dom\Error
+ * @version 1.0
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Attribute
-    extends \Dom\Shablon\Node\ElementProperty
-{
-    /**
-     * Return formatted string contents of name/value.
-     *
-     * @return string
-     */
-    public function toString() {
-        return sprintf('%s="%s"',
-            $this->name, str_replace('"', '&quot;', $this->value));
-    }
-
-    /**
-     * Check name property is 'id' or not.
-     *
-     * @return boolean
-     */
-    public function isId() {
-        return strtolower($this->name) == 'id';
-    }
-}
+class Instance
+    extends \Dom\Error {}

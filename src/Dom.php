@@ -25,27 +25,31 @@
 
 namespace Dom;
 
+use \Dom\Node\Document;
+
 /**
  * @package Dom
- * @object  Dom\Error
- * @extends \Exception
+ * @object  Dom\Dom
+ * @uses    Dom\Node\Document
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Error
-    extends \Exception
+class Dom
 {
     /**
-     * Create a new Error object.
+     * Create a new Document object.
+     *
+     * @param  string $doctype
+     * @param  string $encoding
+     * @param  string $version
+     * @return Dom\Node\Document
      */
-    public function __construct() {
-        // set message
-        $args = func_get_args();
-        $mesg = count($args) == 1
-            ? "\n ". $args[0] ."\n"
-            : "\n ". vsprintf(array_shift($args), $args) ."\n";
-
-        // call parent init
-        parent::__construct($mesg);
+    public function document(
+        $doctype  = Document::DOCTYPE_HTML,
+        $encoding = Document::DEFAULT_ENCODING,
+        $version  = null
+    ) {
+        // return plain document
+        return new Document($doctype, $encoding, $version);
     }
 }

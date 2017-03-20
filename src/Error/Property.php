@@ -30,7 +30,7 @@ namespace Dom\Error;
  * @object  Dom\Error\Property
  * @extends Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
 class Property
     extends \Dom\Error {}

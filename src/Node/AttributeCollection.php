@@ -23,33 +23,14 @@
  * THE SOFTWARE.
  */
 
-namespace Dom;
-
-use \Dom\Node\Document;
+namespace Dom\Node;
 
 /**
- * @package Dom
- * @object  Dom\Dom
- * @uses    Dom\Node\Document
+ * @package Dom\Node
+ * @object  Dom\Node\AttributeCollection
+ * @extends Dom\Collection
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Dom
-{
-    /**
-     * Create a new Document object.
-     *
-     * @param  string $doctype
-     * @param  string $encoding
-     * @param  string $version
-     * @return Dom\Node\Document
-     */
-    public function document(
-        $doctype  = Document::DOCTYPE_HTML,
-        $encoding = Document::DEFAULT_ENCODING,
-        $version  = null
-    ) {
-        // return plain document
-        return new Document($doctype, $encoding, $version);
-    }
-}
+class AttributeCollection
+    extends \Dom\Collection {}

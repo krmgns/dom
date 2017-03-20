@@ -32,7 +32,7 @@ use \Dom\Error;
  * @object  Dom\Node\Node
  * @uses    Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
 class Node
 {

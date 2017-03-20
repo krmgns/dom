@@ -27,10 +27,10 @@ namespace Dom\Error;
 
 /**
  * @package Dom\Error
- * @object  Dom\Error\Instance
+ * @object  Dom\Error\Node
  * @extends Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Instance
+class Node
     extends \Dom\Error {}

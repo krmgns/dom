@@ -30,7 +30,7 @@ namespace Dom\Error;
  * @object  Dom\Error\Argument
  * @extends Dom\Error
  * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
 class Argument
     extends \Dom\Error {}

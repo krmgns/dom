@@ -25,40 +25,47 @@
 
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Shablon\TrivialNodeInterface;
 
 /**
  * @package Dom\Node
- * @object  Dom\Node\DocumentType
- * @extends Dom\Node
- * @uses    Dom\Error
- * @version 1.0
- * @author  Kerem Gunes <qeremy@gmail>
+ * @object  Dom\Node\Text
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
-class DocumentType
-    extends Node
+class Text extends Node implements TrivialNodeInterface
 {
     /**
-     * Prepend doctype xml/html as string?
-     * @var bool
+     * Content of node.
+     * @var string
      */
-    protected $addDoctypeString = true;
+    protected $content = '';
 
     /**
-     * Create a new DocumentType object.
-     * @param string $name
+     * Create a new Text object.
+     *
+     * @param string $content
      */
-    public function __construct($name) {
-        parent::__construct($name, null, Node::TYPE_DOCUMENT_TYPE);
+    public function __construct($content) {
+        $this->setContent($content);
+
+        parent::__construct('#text', $content, Node::TYPE_TEXT);
     }
 
     /**
-     * Set will return doctype as string or not (for xml/html autputs).
+     * Set node content.
      *
-     * @param  boolean $option
-     * @return void
+     * @param string $content
      */
-    public function addDoctypeString($option) {
-        $this->addDoctypeString = (bool) $option;
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
+    /**
+     * Get node content.
+     *
+     * @return string
+     */
+    public function getContent() {
+        return $this->content;
     }
 }
