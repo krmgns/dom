@@ -1,6 +1,6 @@
 As a Web Developer, I always loved the [DOM Tree](//en.wikipedia.org/wiki/Document_Object_Model) in my profession and tried to keep it simple and easy to work with it.
 
-So, DOM object creates XML/HTML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such as contents in raw codes (e.g. REST endpoints or AJAX pages that returns contents in XML/HTML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in the string quotes (").
+So, DOM object creates XML/HTML documents on the fly! It is useful anytime you need to create a DOM tree, especially when working with such contents in raw codes (e.g. REST endpoints or AJAX pages that returns contents in XML/HTML format). It will prepare a prefect DOM tree and give a clean output without struggling to generate contents in the string quotes (`'`, `"`) or `sprintf` stuff.
 
 Now, let's see what we can do with that sweet thing... :)
 
@@ -14,64 +14,48 @@ Now, let's see what we can do with that sweet thing... :)
 - See `pre()` and `prd()` functions in `test.php`
 - Requires PHP >= 5.3 (samples contain 5.4 features, e.g `[]` arrays)
 
-
-**Copying**
-
-```bash
-# clone dom
-$ cd /var/www/<PROJECT>
-$ git clone git@github.com:qeremy/dom.git && cd dom
-
-# install composer
-$ curl -sS https://getcomposer.org/installer | php
-composer.phar update
-```
-
-**Autoload**
-
-```php
-// In your project
-$loader = require(__dir__.'/dom/vendor/autoload.php');
-$loader->add('Dom\\', __dir__);
-```
-
 **Sample: HTML Documents**
 
 ```php
-// Create first Document node (default #document)
-$dom = new \Dom\Dom();
+use Dom\Dom;
+
+// create first document node (default #document)
+$dom = new Dom();
 $doc = $dom->document();
 
-// Create <body> node and append into Document node
+// create <body> node and append into document node
 $body = $doc->createElement('body');
 $body->appendTo($doc);
 
-// Create <div> node with "attributes" and "textContent"
+// create <div> node with "attributes" and "textcontent"
 $div = $doc->createElement('div', [
-    'id'    => 'foo',
-    'class' => 'cls1 cls2',
+    'id'    => 'wrap',
+    'class' => 'wrap',
     'style' => ['color' => '#ff0']
 ], 'The DIV text...');
 
-// Append <div> into <body>
+// append <div> into <body>
 $div->appendTo($body);
-// Or $body->append($div);
+// or $body->append($div);
 
-// Finally get Document contents as HTML output
+// finally get document contents as html output
 $html = $doc->toString();
 pre($html);
 
-// Result
+// result
 <!DOCTYPE html>
-<body><div class="cls1 cls2" style="color:#ff0;" id="theDiv">The DIV text...</div></body>
+<body><div class="wrap" style="color:#ff0;" id="wrap">The DIV text...</div></body>
 ```
 
 **Sample: XML Documents**
 
 ```php
+use Dom\Dom;
+use Dom\Node\Document;
+
 // Create first Document node (set as xml)
-$dom = new \Dom\Dom();
-$doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
+$dom = new Dom();
+$doc = $dom->document(Document::DOCTYPE_XML);
 // With more args: "doctype def=xml", "encoding def=utf-8", "version def=1.0"
 // $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML, "utf-16", "1.1");
 
@@ -98,34 +82,37 @@ pre($xml);
 **Sample: REST Page (as an idea)**
 
 ```php
-// Get user messages
-$app->get('/user/:id/messages', function($request, $response) use($app) {
-    // Built DOM Tree
-    $dom = new \Dom\Dom();
-    $doc = $dom->document(\Dom\Node\Document::DOCTYPE_XML);
+use Dom\Dom;
+use Dom\Node\Document;
 
-    // Create root node and append it into Document
+// get user messages
+$app->get('/user/:id/messages', function($request, $response) use($app) {
+    // built dom tree
+    $dom = new Dom();
+    $doc = $dom->document(Document::DOCTYPE_XML);
+
+    // create root node and append it into document
     $ms = $doc->createElement('messages');
     $ms->appendTo($doc);
 
-    $messages = $app->model('User', ['id' => $request->id])->getMessages();
+    $messages = $app->model('User', $request->getParam('id'))->getMessages();
     foreach ($messages as $message) {
-        // Create child node
+        // create child node
         $m = $doc->createElement('message', [
-            // Add attributes
+            // add attributes
             'date' => $message->date,
             'read' => $message->read
         ]);
-        // Set inner text (or appendCData if needed)
+        // set inner text (or appendcdata if needed)
         $m->appendText($message->text);
-        // Append child node into root node
+        // append child node into root node
         $m->appendTo($ms);
     }
 
-    // Get output
+    // get output
     $xml = $doc->toString();
 
-    // Send response as XML
+    // send response as xml
     $response->send(200, $xml, 'text/xml');
 });
 ```
@@ -155,13 +142,13 @@ prd($div->getAttribute('data-foo'));   // string(8) "The Foo!"
 **Element style/class**
 
 ```php
-// Add, remove and get style text
+// add, remove and get style text
 $div->setStyle('width', '330px');
 $div->removeStyle('color');
 prd($div->getStyle('color'));  // NULL
 prd($div->getStyle('width'));  // string(5) "330px"
 
-// Add, remove, check and get class text
+// add, remove, check and get class text
 $div->addClass('cls3');
 $div->removeClass('cls1');
 prd($div->hasClass('cls1'));   // bool(false)
