@@ -30,7 +30,7 @@ $body->appendTo($doc);
 // create <div> node with "attributes" and "textcontent"
 $div = $doc->createElement('div', [
     'id'    => 'wrap',
-    'class' => 'wrap',
+    'class' => 'wrap-main',
     'style' => ['color' => '#ff0']
 ], 'The DIV text...');
 
@@ -41,10 +41,12 @@ $div->appendTo($body);
 // finally get document contents as html output
 $html = $doc->toString();
 pre($html);
+```
 
-// result
+```html
+<!-- result -->
 <!DOCTYPE html>
-<body><div class="wrap" style="color:#ff0;" id="wrap">The DIV text...</div></body>
+<body><div class="wrap-main" style="color:#ff0;" id="wrap">The DIV text...</div></body>
 ```
 
 **Sample: XML Documents**
@@ -73,8 +75,10 @@ $apples = $doc->createElement('apples')
 // Finally get Document contents as XML output
 $xml = $doc->toString();
 pre($xml);
+```
 
-// Result
+```xml
+<!-- result -->
 <?xml version="1.0" encoding="utf-8"?>
 <fruits><apples><apple color="yellow" /><apple color="green" /></apples></fruits>
 ```
