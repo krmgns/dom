@@ -22,16 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom;
 
-use \Dom\Node\Document;
+use Dom\Node\Document;
 
 /**
  * @package Dom
  * @object  Dom\Dom
- * @uses    Dom\Node\Document
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
 class Dom

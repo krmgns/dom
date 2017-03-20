@@ -22,15 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Error;
 
 /**
  * @package Dom\Error
  * @object  Dom\Error\Property
- * @extends Dom\Error
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Property
-    extends \Dom\Error {}
+class Property extends \Dom\Error {}

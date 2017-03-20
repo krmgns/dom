@@ -22,15 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Node;
 
 /**
  * @package Dom\Node
  * @object  Dom\Node\AttributeCollection
- * @extends Dom\Collection
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class AttributeCollection
-    extends \Dom\Collection {}
+class AttributeCollection extends \Dom\Collection {}

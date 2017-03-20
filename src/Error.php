@@ -22,18 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom;
 
 /**
  * @package Dom
  * @object  Dom\Error
- * @extends \Exception
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Error
-    extends \Exception
+class Error extends \Exception
 {
     /**
      * Create a new Error object.

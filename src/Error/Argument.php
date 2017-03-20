@@ -22,15 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Error;
 
 /**
  * @package Dom\Error
  * @object  Dom\Error\Argument
- * @extends Dom\Error
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Argument
-    extends \Dom\Error {}
+class Argument extends \Dom\Error {}

@@ -55,24 +55,24 @@ pre($html);
 use Dom\Dom;
 use Dom\Node\Document;
 
-// Create first Document node (set as xml)
+// create first document node (set as xml)
 $dom = new Dom();
 $doc = $dom->document(Document::DOCTYPE_XML);
-// With more args: "doctype def=xml", "encoding def=utf-8", "version def=1.0"
-// $doc = $dom->document(Dom\Node\Document::DOCTYPE_XML, "utf-16", "1.1");
+// with more args: "doctype def=xml", "encoding def=utf-8", "version def=1.0"
+// $doc = $dom->document(dom\node\document::doctype_xml, "utf-16", "1.1");
 
-// Create <fruits> node and into Document node
+// create <fruits> node and into document node
 $fruits = $doc->createElement('fruits');
 $fruits->appendTo($doc);
 
-// Create <fruit> nodes and append into <fruits> node
+// create <fruit> nodes and append into <fruits> node
 $apples = $doc->createElement('apples')
     // args: "nodeName", "attributes", "nodeValue", "selfClosing?"
     ->append($doc->createElement('apple', ['color' => 'yellow'], null, true))
     ->append($doc->createElement('apple', ['color' => 'green'],  null, true))
     ->appendTo($fruits);
 
-// Finally get Document contents as XML output
+// finally get document contents as xml output
 $xml = $doc->toString();
 pre($xml);
 ```

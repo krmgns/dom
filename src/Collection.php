@@ -22,18 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom;
 
-use \Dom\Error;
+use Dom\Error;
 
 /**
- * @package    Dom
- * @object     Dom\Collection
- * @uses       Dom\Error
- * @implements \Countable, \IteratorAggregate, \ArrayAccess
- * @version    1.0
- * @author     Kerem Gunes <k-gun@mail.com>
+ * @package Dom
+ * @object  Dom\Collection
+ * @author  Kerem Gunes <k-gun@mail.com>
  */
 class Collection
     implements \Countable, \IteratorAggregate, \ArrayAccess

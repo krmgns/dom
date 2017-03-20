@@ -25,9 +25,9 @@
 
 namespace Dom\Shablon;
 
-use \Dom\Error;
-use \Dom\Node\Node;
-use \Dom\Node\Element;
+use Dom\Error;
+use Dom\Node\Node;
+use Dom\Node\Element;
 
 /**
  * @package Dom\Shablon

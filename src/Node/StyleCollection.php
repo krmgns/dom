@@ -22,21 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Collection;
+use Dom\Error;
 
 /**
  * @package Dom\Node
  * @object  Dom\Node\StyleCollection
- * @extends Dom\Collection
- * @uses    Dom\Error
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class StyleCollection
-    extends \Dom\Collection
+class StyleCollection extends Collection
 {
     /**
      * Check for item type.

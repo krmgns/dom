@@ -22,21 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Error;
 
 /**
  * @package Dom\Node
  * @object  Dom\Node\Document
- * @extends Dom\Node
- * @uses    Dom\Error
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class Document
-    extends Node
+class Document extends Node
 {
     /**
      * Default doctypes.
@@ -140,8 +135,7 @@ class Document
     public function create($type, $contents) {
         switch ($type) {
             case self::TYPE_ELEMENT:
-                throw new Error\Node(
-                    'Not implemented! Use Document::createElement instead.');
+                throw new Error\Node('Not implemented! Use Document::createElement() instead.');
             case self::TYPE_TEXT:
                 return $this->createText($contents);
             case self::TYPE_CDATA:

@@ -16,36 +16,34 @@ function prd($input, $exit = false){
 }
 
 spl_autoload_register(function($name) {
-    require(sprintf('%s/../%s.php', __dir__, ltrim(str_replace('\\', '/', $name), '/')));
+    require sprintf('%s/../src/%s.php', __dir__,
+        preg_replace(['~^\Dom~', '~\\\~'], ['', '/'], $name));
 });
 
 /*****************************/
 use Dom\Dom;
+use Dom\Node\Document;
 
-// create first document node (default #document)
+// Create first Document node (set as xml)
 $dom = new Dom();
-$doc = $dom->document();
+$doc = $dom->document(Document::DOCTYPE_XML);
+// With more args: "doctype def=xml", "encoding def=utf-8", "version def=1.0"
+// $doc = $dom->document(Document::DOCTYPE_XML, "utf-16", "1.1");
 
-// create <body> node and append into document node
-$body = $doc->createElement('body');
-$body->appendTo($doc);
+// Create <fruits> node and into Document node
+$fruits = $doc->createElement('fruits');
+$fruits->appendTo($doc);
 
-// create <div> node with "attributes" and "textcontent"
-$div = $doc->createElement('div', [
-    'id'    => 'wrap',
-    'class' => 'wrap-main',
-    'style' => ['color' => '#ff0']
-], 'The DIV text...');
+// Create <fruit> nodes and append into <fruits> node
+$apples = $doc->createElement('apples')
+    // args: "nodeName", "attributes", "nodeValue", "selfClosing?"
+    ->append($doc->createElement('apple', ['color' => 'yellow'], null, true))
+    ->append($doc->createElement('apple', ['color' => 'green'],  null, true))
+    ->appendTo($fruits);
 
-// append <div> into <body>
-$div->appendTo($body);
-// or $body->append($div);
-
-// finally get document contents as html output
-$html = $doc->toString();
-pre($html);
-
-
+// Finally get Document contents as XML output
+$xml = $doc->toString();
+pre($xml);
 return;
 
 $dom = new Dom\Dom();

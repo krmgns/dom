@@ -22,15 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Node;
+
+use Dom\Collection;
 
 /**
  * @package Dom\Node
  * @object  Dom\Node\NodeCollection
- * @extends Dom\Collection
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class NodeCollection
-    extends \Dom\Collection {}
+class NodeCollection extends Collection {}

@@ -22,21 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace Dom\Node;
 
-use \Dom\Error;
+use Dom\Error;
 
 /**
  * @package Dom\Node
  * @object  Dom\Node\DocumentType
- * @extends Dom\Node
- * @uses    Dom\Error
- * @version 1.0
  * @author  Kerem Gunes <k-gun@mail.com>
  */
-class DocumentType
-    extends Node
+class DocumentType extends Node
 {
     /**
      * Prepend doctype xml/html as string?
